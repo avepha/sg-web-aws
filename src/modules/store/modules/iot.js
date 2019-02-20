@@ -76,7 +76,10 @@ const InitIoT = async (context) => {
     IoT.attachMessageHandler((topic, jsonPayload) => {
         const payload = JSON.parse(jsonPayload.toString());
         if (topic.startsWith('STREAM_STATUS')) {
-            context.commit('SET_SENSORS', payload);
+            console.log(payload)
+            context.commit('SET_SENSORS', payload.sensors);
+            context.commit('SET_DATETIME', payload.datetime);
+            context.commit('SET_GPIO', payload.gpio);
         }
     });
     

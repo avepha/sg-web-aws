@@ -52,7 +52,6 @@ const getUserToken = currentUser => (
 export const getAwsCredentials = (token, provider) => (
   new Promise((resolve, reject) => {
     let providerKey = '';
-
     switch (provider) {
       case 'user_pool':
         providerKey = `cognito-idp.${Config.awsRegion}.amazonaws.com/${Config.awsCognitoUserPoolId}`;

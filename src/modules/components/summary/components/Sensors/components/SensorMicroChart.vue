@@ -1,6 +1,6 @@
 <template>
   <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 sensor-panel">
-    
+    <!-- {{GET_SENSORS}} -->
   <div class="pull-left" style="margin-top: 5px;">
     <vue-pie-chart :id="id" :value="GET_SENSORS[id]"></vue-pie-chart>
   </div>

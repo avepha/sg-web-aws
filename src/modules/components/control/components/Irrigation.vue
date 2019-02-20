@@ -106,7 +106,7 @@
       submit: function () {
         this.$store.dispatch('popupUpdateModal');
         this.control[this.ch - 1].mode = 5;
-        this.$store.dispatch('UPDATE_CONTROL');
+        this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1);
       },
       update: function () {
         this.soilobj.from = this.control[this.ch - 1].irrigation.soil_lower;

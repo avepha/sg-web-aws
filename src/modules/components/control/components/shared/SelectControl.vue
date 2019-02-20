@@ -21,7 +21,7 @@
         <form class="smart-form">
           <fieldset>
             <div class="row">
-              <section class="col col-5">
+              <section class="col col-12">
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="0" v-model="select">
                   <i data-swchon-text="ON" data-swchoff-text="OFF" ></i>Manual</label>
@@ -36,10 +36,19 @@
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Set Bound</label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="4" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>SB Timing</label>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Setbound & Timing</label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="5" v-model="select">
                   <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Irrigation</label>
+                <label class="toggle">
+                  <input type="radio" name="radio-toggle" value="6" v-model="select">
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Advance Setpoint</label>
+                <label class="toggle">
+                  <input type="radio" name="radio-toggle" value="7" v-model="select">
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Advance Setbound</label>
+                <label class="toggle">
+                  <input type="radio" name="radio-toggle" value="8" v-model="select">
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Advance Setbound & Timing</label>
               </section>
             </div>
           </fieldset>
@@ -52,7 +61,7 @@
 <script>
 
 import {mapGetters} from 'vuex';
-var controlName = ['manual', 'timer', 'setpoint', 'setbound', 'hybrid', 'irrigation']
+var controlName = ['manual', 'timer', 'setpoint', 'setbound', 'hybrid', 'irrigation', 'advancecondition', 'advancesetbound', 'advancetimingsetbound']
 export default {
   computed:{
     ...mapGetters(['control','getControlName']),
@@ -67,7 +76,7 @@ export default {
   },
   watch:{
     select:function(data){
-   
+      console.log(data);
      this.$router.replace({
        name: controlName[data]
      })

@@ -64,6 +64,22 @@ const Irrigation = resolve => {
     }, 'grobot-control')
 }
 
+const AdvanceCondition = resolve => {
+    require.ensure(['../components/control/components/AdvanceCondition.vue'], () => {
+        resolve(require('../components/control/components/AdvanceCondition.vue'));
+    }, 'grobot-control')
+}
+const AdvanceSetbound = resolve => {
+    require.ensure(['../components/control/components/AdvanceSetbound.vue'], () => {
+        resolve(require('../components/control/components/AdvanceSetbound.vue'));
+    }, 'grobot-control')
+}
+const AdvanceTimingSetbound = resolve => {
+    require.ensure(['../components/control/components/AdvanceTimingSetbound.vue'], () => {
+        resolve(require('../components/control/components/AdvanceTimingSetbound.vue'));
+    }, 'grobot-control')
+}
+
 const Conductivity = resolve => {
     require.ensure(['../components/control/components/control/Conductivity.vue'], () => {
         resolve(require('../components/control/components/control/Conductivity.vue'));
@@ -208,6 +224,9 @@ export const routes = [
                     { path: ':ch/setpoint', name: "setpoint", component: Setpoint },
                     { path: ':ch/setbound', name: "setbound", component: Setbound },
                     { path: ':ch/irrigation', name: "irrigation", component: Irrigation },
+                    { path: ':ch/advcond', name: "advancecondition", component: AdvanceCondition },
+                    { path: ':ch/advsb', name: "advancesetbound", component: AdvanceSetbound },
+                    { path: ':ch/advsbt', name: "advancetimingsetbound", component: AdvanceTimingSetbound },
                     { path: 'conductivity', name: "conductivity", component: Conductivity },
                     { path: 'acidity', name: "acidity", component: Acidity },
                     { path: 'co2', name: "co2", component: Co2 },

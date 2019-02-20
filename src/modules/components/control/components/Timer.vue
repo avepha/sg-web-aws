@@ -126,7 +126,7 @@
       submit: function(){
         this.$store.dispatch('popupUpdateModal');
         this.control[this.ch-1].mode = 1;
-        this.$store.dispatch('UPDATE_CONTROL');
+        this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1);
       }
     },
     computed: {

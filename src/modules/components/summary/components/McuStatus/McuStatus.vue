@@ -34,7 +34,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(value,ind) in GET_SENSORS.status.gpio" :key="value + ' ' + ind">
+                      <tr v-for="(value,ind) in GET_GPIO" :key="value + ' ' + ind">
                         <td style="padding: 5px; font-size: 16px;"> Channel {{ind + 1}} </td>
                         <td style="padding: 5px;">
                           <button-status :value="value"></button-status>

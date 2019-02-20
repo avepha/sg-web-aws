@@ -88,7 +88,7 @@
       submit: function(){
         this.$store.dispatch('popupUpdateModal');
         this.control[this.ch - 1].mode = 2;
-        this.$store.dispatch('UPDATE_CONTROL');
+        this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1);
       },
       update: function(){
         this.control[this.ch-1].sensor = this.select;

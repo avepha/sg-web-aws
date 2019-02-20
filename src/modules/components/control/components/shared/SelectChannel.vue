@@ -29,7 +29,7 @@
             <label class="select">
               <select class="input-lg"  v-model="select">
                 <option value="-1" key="c0">Choose Channel</option>
-                <option v-for="(c,ind) in getControlName" :key="c + ind" :value="ind+1">Channel {{ind+1}}: {{c}}</option>
+                <option v-for="(c,ind) in control" :key="controlName[c.mode] + ind" :value="ind+1">Channel {{ind+1}}: {{controlName[c.mode]}}</option>
               </select>
               <i></i>
             </label>
@@ -44,14 +44,15 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getControlName"]),
+    ...mapGetters(["getControlName", "control"]),
     ch: function() {
       return this.$route.params.ch;
     }
   },
   data() {
     return {
-      select: -1
+      select: -1,
+      controlName: ['Manual', 'Timer', 'Setpoint', 'Setbound', 'Hybrid', 'Irrigation', 'Advance Setpoint']
     };
   },
 
@@ -62,7 +63,11 @@ export default {
       }
     },
     select: function(data) {
+
+      
       if (data != -1) {
+
+        console.log('go to', this.getControlName[data - 1], this.getControlName)
         this.$router.replace({
           name: this.getControlName[data - 1],
           params: {

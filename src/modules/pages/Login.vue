@@ -14,7 +14,7 @@
     <div class="container-fluid" style="margin-top: 100px;">
       <div class="row" >
             <div class="well no-padding col-md-4 col-lg-4" style="float: none; margin: 0 auto;">
-              <form action="index.html" id="login-form" class="smart-form client-form">
+              <form  class="smart-form client-form" @submit.prevent="login">
                 <header>
                   Sign In
                 </header>
@@ -23,7 +23,7 @@
                     <label class="label">Username</label>
                     <label class="input">
                       <i class="icon-append fa fa-user"></i>
-                      <input type="email" name="email" v-model="username">
+                      <input type="text" name="email" v-model="username">
                       <b class="tooltip tooltip-top-right">
                         <i class="fa fa-user txt-color-teal"></i> Please enter username</b>
                     </label>
@@ -47,13 +47,10 @@
                   </section>
                 </fieldset>
                 <footer>
-                  <button type="button" class="btn btn-success" @click="login" :disabled="loginProcessing">
+                  <button type="submit" class="btn btn-success" :disabled="loginProcessing">
                   <img src="/src/assets/img/Spinner.svg" height="35" v-show="loginProcessing">
                     Sign in
                   </button>
-                  <!-- <button type="button" class="btn btn-default" @click="logout">
-                    Sign out
-                  </button> -->
                 </footer>
               </form>
 

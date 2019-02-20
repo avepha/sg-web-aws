@@ -5,7 +5,7 @@ import axios from '../../axios/axios';
 const state = {
     sensorName:['vpd','soil', 'par', 'temperature', 'humidity', 'co2', 'light']
 }
-var controlName = ['manual', 'timer', 'setpoint', 'setbound', 'hybrid',  'irrigation']
+var controlName = ['manual', 'timer', 'setpoint', 'setbound', 'hybrid',  'irrigation', 'advancecondition']
 
 const getters = {
     
