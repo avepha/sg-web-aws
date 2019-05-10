@@ -43,26 +43,11 @@
                     </label>
               </section>
 
-              <!-- <section>
-                <label>Choose Sensor</label>
-                  <label class="select" style="margin-bottom: 20px;">
-                      <select class="input-lg" @input="selectSensor">
-                        <option value="soil">Soil Moisture</option>
-                        <option value="vpd">VPD</option>
-                        <option value="temperature">Temperature</option>
-                        <option value="humidity">Relative Humidity</option>
-                        <option value="co2">CO<sub>2</sub></option>
-                        <option value="par">PAR</option>
-                        <option value="paracc">PAR Accumulation</option>
-                      </select>
-                      <i></i>
-                    </label>
-              </section> -->
             </div>
           </fieldset>
           <footer>
             <button type="button" class="btn btn-primary" @click="fetchData">
-              Fetch Data 
+              Fetch Data
             </button>
           </footer>
         </form>

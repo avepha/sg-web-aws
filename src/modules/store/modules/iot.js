@@ -1,9 +1,8 @@
 
+import moment from 'moment'
 import * as Cognito from '../../lib/aws-cognito'
 import * as IoT from '../../lib/aws-iot'
 import * as Api from '../../lib/api-gateway'
-import * as DynamoDB from '../../lib/dynamodb'
-
 const state = {
     isIoTInit: false,
     thingName: '801934a38630'
@@ -59,7 +58,7 @@ const InitIoT = async (context) => {
 
     context.commit('SET_THINGNAME', resMid.mid);
     var attachs = await Api.attachConnectPolicy(identityId);
-    console.log('attach', attachs); 
+    console.log('attach', attachs);
     const awsCredentials = JSON.parse(sessionStorage.getItem('awsCredentials'));
 
     IoT.initNewClient(awsCredentials)
@@ -76,13 +75,20 @@ const InitIoT = async (context) => {
     IoT.attachMessageHandler((topic, jsonPayload) => {
         const payload = JSON.parse(jsonPayload.toString());
         if (topic.startsWith('STREAM_STATUS')) {
-            console.log(payload)
-            context.commit('SET_SENSORS', payload.sensors);
-            context.commit('SET_DATETIME', payload.datetime);
+            context.commit('SET_SENSORS', payload.sensors)
+
+            const datetime = (payload.datetime !== undefined)?
+              moment(payload.datetime)
+              : moment()
+
+            context.commit('SET_DATETIME', {
+              date: datetime.format('YYYY-MM-DD'),
+              time: datetime.format('HH:mm:ss')});
+
             context.commit('SET_GPIO', payload.gpio);
         }
     });
-    
+
     IoT.registerThing(context.state.thingName)
     IoT.attachThingConnectHander(() => {
         console.log('[Info] AWS-IoT Shadow: CONNECTED')
@@ -102,7 +108,7 @@ const InitIoT = async (context) => {
     IoT.attachThingStatusHandler((thingName, stat, clientToken, stateObject) => {
         console.log(stat, stateObject);
         if (stat === 'accepted') {
-            // check get message 
+            // check get message
             if (stateObject.state.reported) {
                 var state = stateObject.state.reported;
                 var control = [state.control.ch1, state.control.ch2, state.control.ch3, state.control.ch4];

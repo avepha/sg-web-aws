@@ -20,7 +20,7 @@
 
     <!-- NAVIGATION : This navigation is also responsive-->
     <nav>
-      <!-- 
+      <!--
 				NOTE: Notice the gaps after each icon usage <i></i>..
 				Please note that these links work a bit different than
 				traditional href="" links. See documentation for details.
@@ -35,7 +35,7 @@
             <span class="menu-item-parent">Dashboard</span>
           </a>
         </router-link>
-       
+
 
         <router-link to="/status" tag="li" active-class="active">
           <a href="#">
@@ -50,7 +50,7 @@
             <span class="menu-item-parent">MCU CONTROL</span>
           </a>
         </router-link>
-        
+
         <li class="top-menu-invisible">
           <a href="#" @click="show('configuration')">
             <i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i>
@@ -90,7 +90,7 @@
             </b>
           </a>
           <ul>
-           
+
             <router-link to="/grobot-setting/activity" tag="li" active-class="active">
               <a >
                 <i class="fa fa-lg fa-fw fa-gear"></i> MCU Config</a>
@@ -117,12 +117,12 @@
           </a>
         </router-link>
 
-        <router-link to="/pages/show" tag="li" active-class="active">
-          <a>
-            <i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i>
-            <span class="menu-item-parent">SHOW DATA</span>
-          </a>
-        </router-link>
+        <!--<router-link to="/pages/show" tag="li" active-class="active">-->
+          <!--<a>-->
+            <!--<i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i>-->
+            <!--<span class="menu-item-parent">SHOW DATA</span>-->
+          <!--</a>-->
+        <!--</router-link>-->
       </ul>
     </nav>
 

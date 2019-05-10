@@ -85,11 +85,11 @@ const Conductivity = resolve => {
         resolve(require('../components/control/components/control/Conductivity.vue'));
     }, 'conductivity')
 }
-const Acidity = resolve => {
-    require.ensure(['../components/control/components/control/Acidity.vue'], () => {
-        resolve(require('../components/control/components/control/Acidity.vue'));
-    }, 'Acidity')
-}
+// const Acidity = resolve => {
+//     require.ensure(['../components/control/components/control/Acidity.vue'], () => {
+//         resolve(require('../components/control/components/control/Acidity.vue'));
+//     }, 'Acidity')
+// }
 const Co2 = resolve => {
     require.ensure(['../components/control/components/control/Co2.vue'], () => {
         resolve(require('../components/control/components/control/Co2.vue'));
@@ -228,7 +228,7 @@ export const routes = [
                     { path: ':ch/advsb', name: "advancesetbound", component: AdvanceSetbound },
                     { path: ':ch/advsbt', name: "advancetimingsetbound", component: AdvanceTimingSetbound },
                     { path: 'conductivity', name: "conductivity", component: Conductivity },
-                    { path: 'acidity', name: "acidity", component: Acidity },
+                    // { path: 'acidity', name: "acidity", component: Acidity },
                     { path: 'co2', name: "co2", component: Co2 },
                     { path: 'led', name: "led", component: Led },
                     { path: 'water', name: "water", component: WaterProcess },

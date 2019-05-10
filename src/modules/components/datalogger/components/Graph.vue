@@ -49,18 +49,16 @@
       },
       craftStringData: function () {
         this.strData = "Date," + this.sensor.toUpperCase() + "\n";
-        this.date = moment(this.data[0].date  + ' ' + this.data[0].time).format('MMM Do YYYY');
+        this.date = moment(this.data[0].created_time).format('MMM Do YYYY');
         this.data.forEach(log => {
-          let datetime = log.date + ' ' + log.time
-          let sensorData = (log[this.sensor] - 5) + ";" + (log[this.sensor]) + ";" + (log[this.sensor] + 5);
+          let datetime = moment(log.created_time).format('YYYY-MM-DD HH:mm:ss')
+          let sensorData = (log['sensors'][this.sensor] - 5) + ";" + (log['sensors'][this.sensor]) + ";" + (log['sensors'][this.sensor] + 5);
           let str = datetime + "," + sensorData + "\n";
           this.strData += str;
         });
-        // console.log(this.strData);
       }
     },
     mounted() {
-      // console.log(this.sensor);
       this.craftStringData();
       this.createGraph();
     }

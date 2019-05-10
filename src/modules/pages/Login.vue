@@ -6,7 +6,6 @@
           <img src="/src/assets/img/logo1.png" alt=""> </span>
       </div>
       <span id="extr-page-header-space">
-        <!-- <span class="hidden-mobile hiddex-xs">Need an account?</span> -->
         <span><a class="btn btn-default">Device</a></span>
       </span>
     </header>
@@ -91,12 +90,4 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.fill { 
-    min-height: 100%;
-    height: 100%;
-}
-
-</style>
 
