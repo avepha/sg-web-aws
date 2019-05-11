@@ -3,7 +3,6 @@
 </template>
 
 <script>
-  import moment from 'moment'
   export default {
     computed: {
       auth() {
@@ -11,6 +10,7 @@
       }
     },
     created(){
+      console.log(this.$store.getters.getVersion)
       this.$store.dispatch('IS_AUTH');
     }
   };
