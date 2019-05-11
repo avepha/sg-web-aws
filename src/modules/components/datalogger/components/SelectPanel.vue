@@ -1,6 +1,7 @@
 <template>
-  <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-3" data-widget-colorbutton="false"
-    data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" role="widget">
+  <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-3"
+       data-widget-colorbutton="false"
+       data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" role="widget">
 
     <header role="heading" class="ui-sortable-handle">
       <div class="jarviswidget-ctrls" role="menu">
@@ -22,27 +23,28 @@
         <form class="smart-form">
           <fieldset>
             <div class="row">
-
               <section>
-                <label>Choose Date</label>
-                <input type="date" name="" id="" class="form-control" v-model="date">
+                <label>Choose start-date</label>
+                <input type="date" name="" id="" class="form-control" v-model="dateStart">
               </section>
-
+              <section>
+                <label>Choose end-date</label>
+                <input type="date" name="" id="" class="form-control" v-model="dateEnd">
+              </section>
               <section>
                 <label>Choose Interval</label>
-                  <label class="select" style="margin-bottom: 20px;">
-                      <select class="input-lg" v-model.number="interval">
-                        <option value="5">5 seconds</option>
-                        <option value="15">15 seconds</option>
-                        <option value="30">30 seconds</option>
-                        <option value="60">1 minute</option>
-                        <option value="180">3 minutes</option>
-                        <option value="300">5 minutes</option>
-                      </select>
-                      <i></i>
-                    </label>
+                <label class="select" style="margin-bottom: 20px;">
+                  <select class="input-lg" v-model.number="interval">
+                    <option v-if="diffDate < 10" value="1">1 minute</option>
+                    <option v-if="diffDate < 20" value="3">3 minutes</option>
+                    <option v-if="diffDate < 30" value="5">5 minutes</option>
+                    <option v-if="diffDate < 30" value="10">10 minutes</option>
+                    <option v-if="diffDate < 30" value="15">15 minutes</option>
+                    <option value="30">30 minutes</option>
+                  </select>
+                  <i></i>
+                </label>
               </section>
-
             </div>
           </fieldset>
           <footer>
@@ -57,28 +59,48 @@
 </template>
 
 <script>
-import moment from "moment";
-var $ = (window.jQuery = require("jquery"));
-require("../../../../assets/js/plugin/clockpicker/clockpicker.min.js");
-export default {
-  data() {
-    return {
-      date: moment().format("YYYY-MM-DD"),
-      select: "soil",
-      interval: 30
-    };
-  },
-  methods: {
-    fetchData: function() {
-      this.$store.dispatch('popupFetching');
-      this.$router.push({ path: "/logger" });
-      setTimeout(() => {
-        this.$router.push({ path: "/logger/graph", query: {
-          interval: this.interval,
-          date: this.date
-        } });
-      }, 1000);
+  import moment from 'moment'
+
+  var $ = (window.jQuery = require('jquery'))
+  require('../../../../assets/js/plugin/clockpicker/clockpicker.min.js')
+  export default {
+    data() {
+      return {
+        dateStart: moment().format('YYYY-MM-DD'),
+        dateEnd: moment().format('YYYY-MM-DD'),
+        select: 'soil',
+        interval: 30
+      }
+    },
+    computed: {
+      diffDate(){
+        const start = moment(this.dateStart);
+        const end = moment(this.dateEnd)
+        return Math.abs(end.diff(start, 'days'))
+      }
+    },
+    watch: {
+      diffDate(value){
+        if(value > 5) {
+          this.interval = 30;
+        }
+      }
+    },
+    methods: {
+      fetchData: function () {
+        // this.$store.dispatch('popupFetching')
+        this.$router.push({path: '/logger'})
+        setTimeout(() => {
+          this.$router.push({
+            path: '/logger/graph',
+            query: {
+              interval: this.interval,
+              before: this.dateEnd,
+              after: this.dateStart,
+            }
+          })
+        })
+      }
     }
   }
-};
 </script>

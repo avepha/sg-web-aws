@@ -9,7 +9,7 @@
         <span><a class="btn btn-default">Device</a></span>
       </span>
     </header>
-    
+
     <div class="container-fluid" style="margin-top: 100px;">
       <div class="row" >
             <div class="well no-padding col-md-4 col-lg-4" style="float: none; margin: 0 auto;">
@@ -36,7 +36,7 @@
                       <b class="tooltip tooltip-top-right">
                         <i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
                     </label>
-                    
+
                   </section>
 
                   <section>
@@ -52,7 +52,9 @@
                   </button>
                 </footer>
               </form>
-
+            </div>
+            <div style="position: fixed; bottom: 0; right: 0; color: grey;">
+              v.{{getVersion}}
             </div>
       </div>
     </div>
@@ -66,7 +68,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      username: "grobotg",
+      username: "grobot",
       password: "raspberry",
       stayIn: false,
       loginProcessing: false
@@ -86,7 +88,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['GET_SENSORS_DATA'])
+    ...mapGetters(['GET_SENSORS_DATA', 'getVersion'])
   }
 };
 </script>

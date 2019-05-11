@@ -60,13 +60,13 @@
 </template>
 
 <script>
-  import moment from 'moment'
   import axios from '../../../axios/axios'
   import Graph from './Graph.vue'
 
   var hostname = window.location.hostname
   var port = window.location.port
   var serverLink = 'http://' + hostname + ':3000'
+  import moment from 'moment'
 
   export default {
     data() {
@@ -97,48 +97,33 @@
 
     mounted() {
       this.data = []
-      if (this.$route.query.date == undefined) {
-        this.$router.push({path: '/logger'})
-      } else {
-        const data = this.$route.query
-        const after = moment(data.date).toISOString()
-        const before = moment(data.date + ' 23:59:59').toISOString()
-        const mid = this.$store.getters.GET_THINGNAME
-
-        axios.get('https://bv5chy8u3c.execute-api.ap-southeast-1.amazonaws.com/dev/sensor-logger', {
-          params: {
-            mid,
-            after,
-            before,
-            limit: 50
-          }
-        }).then(({data}) => {
-          this.$store.commit('popupShow', 'Records: ' + data.length)
-          setTimeout(() => this.$store.commit('popupHide'), 3000)
-          if (data.length > 0) {
-            this.sensor = 'soil'
-            this.data = data
-            this.showGraph = true
-          } else {
-            this.$router.push({path: '/logger'})
-          }
-        })
-
-        // DynamoDB.fetchLogger(from, to, mid)
-        //   .then(logger => {
-        //     this.$store.commit("popupShow", "Records: " + logger.Count);
-        //     setTimeout(() => this.$store.commit("popupHide"), 3000);
-        //     if (logger.Count > 0) {
-        //       this.sensor = "soil";
-        //       this.data = logger.Items.map(item => item.payload)
-        //       this.showGraph = true;
-        //     } else {
-        //       this.$router.push({ path: "/logger" });
-        //     }
-        //   })
-        //   .catch(err => console.log(err));
-        this.datevalue = 'DATE' + data.date
+      const {before, after} = this.$route.query
+      if (before === undefined || after === undefined) {
+        return this.$router.push({path: '/logger'})
       }
+
+      axios.get('https://bv5chy8u3c.execute-api.ap-southeast-1.amazonaws.com/dev/sensor-logger', {
+        params: {
+          mid: this.$store.getters.GET_THINGNAME,
+          before: moment(before).add(1439, 'minute').toISOString(),
+          after: moment(after).toISOString(),
+          limit: 1440,
+        }
+      }).then(response => {
+        const {data: body} = response
+
+        this.$store.commit('popupShow', 'Records: ' + body.length)
+        setTimeout(() => this.$store.commit('popupHide'), 3000)
+
+        if (body.length === 0) {
+          return this.$router.push({path: '/logger'})
+        }
+
+        this.sensor = 'soil'
+        this.data = body
+        this.showGraph = true
+        this.datevalue = 'DATE'
+      })
     }
   }
 </script>
