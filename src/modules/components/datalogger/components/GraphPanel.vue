@@ -114,7 +114,7 @@
           mid: this.$store.getters.GET_THINGNAME,
           before: moment(before).add(1439, 'minute').toISOString(),
           after: moment(after).toISOString(),
-          limit: interval * 1440
+          limit: Number.MAX_SAFE_INTEGER
         }
       }).then(response => {
         const {data: body} = response
