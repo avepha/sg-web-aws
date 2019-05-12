@@ -1,4 +1,4 @@
-import pkg from '../../../../package-lock'
+import pkg from '../../../../package.json'
 const state = {
   isUpdating: false,
   popupMessage: 'Updating',
