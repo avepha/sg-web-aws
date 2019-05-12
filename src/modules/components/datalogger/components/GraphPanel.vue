@@ -83,21 +83,28 @@
     },
     methods: {
       refresh() {
-        console.log(this.$route.query)
         this.showGraph = false
         this.sensor = this.sensor
         setTimeout(() => {
           this.showGraph = true
         }, 2000)
+      },
+      filterDataByInterval(data, interval) {
+        if(data.length === 0) return []
+
+        let skipCount = 1
+        return data.filter( () => {
+          skipCount = (skipCount < interval) ? skipCount + 1 : 1
+          return (skipCount >= interval)
+        })
       }
     },
     components: {
       Graph
     },
-
     mounted() {
       this.data = []
-      const {before, after} = this.$route.query
+      const {before, after, interval} = this.$route.query
       if (before === undefined || after === undefined) {
         return this.$router.push({path: '/logger'})
       }
@@ -107,22 +114,21 @@
           mid: this.$store.getters.GET_THINGNAME,
           before: moment(before).add(1439, 'minute').toISOString(),
           after: moment(after).toISOString(),
-          limit: 1440,
+          limit: interval * 1440
         }
       }).then(response => {
         const {data: body} = response
+        this.data = this.filterDataByInterval(body, interval)
+        this.datevalue = 'DATE'
+        this.sensor = 'soil'
 
-        this.$store.commit('popupShow', 'Records: ' + body.length)
+        this.$store.commit('popupShow', 'Records: ' + this.data.length)
         setTimeout(() => this.$store.commit('popupHide'), 3000)
 
-        if (body.length === 0) {
+        if (this.data.length === 0)
           return this.$router.push({path: '/logger'})
-        }
 
-        this.sensor = 'soil'
-        this.data = body
         this.showGraph = true
-        this.datevalue = 'DATE'
       })
     }
   }

@@ -80,15 +80,13 @@
       }
     },
     watch: {
-      diffDate(value){
-        if(value > 5) {
-          this.interval = 30;
-        }
+      diffDate(diffStartToEnd){
+        if (diffStartToEnd > 5) this.interval = 30
       }
     },
     methods: {
       fetchData: function () {
-        // this.$store.dispatch('popupFetching')
+        this.$store.dispatch('popupFetching')
         this.$router.push({path: '/logger'})
         setTimeout(() => {
           this.$router.push({
