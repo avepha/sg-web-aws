@@ -66,7 +66,7 @@
 
       setTimeout(() => {
         const mid = this.$store.getters.GET_THINGNAME
-        axios.get('https://bv5chy8u3c.execute-api.ap-southeast-1.amazonaws.com/dev/sensor-logger', {
+        axios.get('/dev/sensor-logger', {
           params: {
             mid,
             limit: 50
