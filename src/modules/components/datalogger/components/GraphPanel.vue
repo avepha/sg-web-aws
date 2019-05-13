@@ -41,8 +41,10 @@
 
           <footer>
             <form :action="link" method="get" target="_blank">
-              <input type="hidden" name="date" :value="datevalue"/>
-              <input type="hidden" name="token" :value="token"/>
+              <input type="hidden" name="mid" :value="mid"/>
+              <input type="hidden" name="after" :value="after"/>
+              <input type="hidden" name="before" :value="before"/>
+              <input type="hidden" name="limit" :value="limit"/>
               <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save "></i> Export to .xls
               </button>
@@ -60,25 +62,23 @@
 </template>
 
 <script>
-  import axios from '../../../axios/axios'
+  import axios, {baseURL} from '../../../axios/axios'
   import Graph from './Graph.vue'
-
-  var hostname = window.location.hostname
-  var port = window.location.port
-  var serverLink = 'http://' + hostname + ':3000'
   import moment from 'moment'
 
   export default {
     data() {
       return {
-        link: serverLink + '/logger/gets/date/csv',
+        link: `${baseURL}dev/sensor-logger-csv`,
         sensor: 'soil',
         data: [],
         record: 0,
         showGraph: false,
         datevalue: '',
-        token: ''
-        // /logger/finds/date/csv?date=DATE2018-03-24
+        token: '',
+        mid: '',
+        after: '',
+        before: '',
       }
     },
     methods: {
@@ -109,12 +109,16 @@
         return this.$router.push({path: '/logger'})
       }
 
-      axios.get('https://bv5chy8u3c.execute-api.ap-southeast-1.amazonaws.com/dev/sensor-logger', {
+      this.mid = this.$store.getters.GET_THINGNAME
+      this.after = moment(after).toISOString()
+      this.before = moment(before).add(1439, 'minute').toISOString()
+      this.limit = Number.MAX_SAFE_INTEGER
+      axios.get('/dev/sensor-logger', {
         params: {
-          mid: this.$store.getters.GET_THINGNAME,
-          before: moment(before).add(1439, 'minute').toISOString(),
-          after: moment(after).toISOString(),
-          limit: Number.MAX_SAFE_INTEGER
+          mid: this.mid,
+          before: this.before,
+          after: this.after,
+          limit: this.limit
         }
       }).then(response => {
         const {data: body} = response
