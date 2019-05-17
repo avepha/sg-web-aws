@@ -7,7 +7,7 @@ echo "$PROJECT_NAME"
 
 
 echo "[Info] Deploy UI"
-#npm run build --prefix $BASEDIR
+npm run build --prefix $BASEDIR
 DIST_PATH="$BASEDIR/public"
 
 if [ ! -d "$DIST_PATH" ]; then  # for file "if [-f /home/rama/file]"
@@ -28,4 +28,4 @@ fi
 echo "[Info] Move src to dist $DEPLOY_PATH"
 cp -r $BASEDIR/src/assets $DIST_PATH/src
 cp -r $BASEDIR/index.html $DIST_PATH
-
+aws s3 sync $BASEDIR/public s3://sg-web-hosting
