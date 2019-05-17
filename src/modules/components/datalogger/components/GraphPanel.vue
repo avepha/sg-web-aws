@@ -79,6 +79,7 @@
         mid: '',
         after: '',
         before: '',
+        limit: 0
       }
     },
     methods: {
