@@ -12,13 +12,11 @@
 import SelectChannel from './components/shared/SelectChannel.vue'
 import SelectControl from './components/shared/SelectControl.vue'
 import Manual from './components/Manual.vue'
-import Setpoint from './components/Setpoint.vue'
 export default {
     components:{
         appSelectChannel: SelectChannel,
         appSelectControl: SelectControl,
         appManual: Manual,
-        appSetpoint: Setpoint
     },
     mounted () {
         this.$store.dispatch('REQUEST_SHADOW');

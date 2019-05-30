@@ -20,13 +20,6 @@ const McuStatus = resolve => {
     }, 'grobot-summary')
 }
 
-
-// import Control from '../components/control/Control.vue';
-// import Manual from '../components/control/components/Manual.vue'
-// import Timer from '../components/control/components/Timer.vue'
-// import Setpoint from '../components/control/components/Setpoint.vue'
-// import Setbound from '../components/control/components/Setbound.vue'
-// import Irrigation from '../components/control/components/Irrigation.vue'
 const Control = resolve => {
     require.ensure(['../components/control/Control.vue'], () => {
         resolve(require('../components/control/Control.vue'));
@@ -42,11 +35,7 @@ const Timer = resolve => {
         resolve(require('../components/control/components/Timer.vue'));
     }, 'grobot-control')
 }
-const Setpoint = resolve => {
-    require.ensure(['../components/control/components/Setpoint.vue'], () => {
-        resolve(require('../components/control/components/Setpoint.vue'));
-    }, 'grobot-control')
-}
+
 const Setbound = resolve => {
     require.ensure(['../components/control/components/Setbound.vue'], () => {
         resolve(require('../components/control/components/Setbound.vue'));
@@ -221,10 +210,9 @@ export const routes = [
                     { path: ':ch/manual', name: "manual", component: Manual },
                     { path: ':ch/timer', name: "timer", component: Timer },
                     { path: ':ch/hybrid', name: "hybrid", component: Hybrid },
-                    { path: ':ch/setpoint', name: "setpoint", component: Setpoint },
                     { path: ':ch/setbound', name: "setbound", component: Setbound },
                     { path: ':ch/irrigation', name: "irrigation", component: Irrigation },
-                    { path: ':ch/advcond', name: "advancecondition", component: AdvanceCondition },
+                    { path: ':ch/setpoint', name: "advancecondition", component: AdvanceCondition },
                     { path: ':ch/advsb', name: "advancesetbound", component: AdvanceSetbound },
                     { path: ':ch/advsbt', name: "advancetimingsetbound", component: AdvanceTimingSetbound },
                     { path: 'conductivity', name: "conductivity", component: Conductivity },
