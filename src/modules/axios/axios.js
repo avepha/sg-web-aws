@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseURL = 'https://qoocpkvxu7.execute-api.ap-southeast-1.amazonaws.com/'
+export const baseURL = 'https://api.smartgrobot.com'
 const instance = axios.create({
     baseURL
 });
