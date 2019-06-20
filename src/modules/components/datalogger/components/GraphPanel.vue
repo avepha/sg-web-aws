@@ -69,7 +69,7 @@
   export default {
     data() {
       return {
-        link: `${baseURL}dev/sensor-logger-csv`,
+        link: `${baseURL}/dev/sensor-logger-csv`,
         sensor: 'soil',
         data: [],
         record: 0,
