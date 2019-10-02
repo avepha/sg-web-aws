@@ -17,8 +17,5 @@
     computed: {
       ...mapGetters(['getVersion'])
     },
-    mounted() {
-      console.log(this.getVersion)
-    }
   }
 </script>

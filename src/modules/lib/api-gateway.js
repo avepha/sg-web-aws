@@ -67,7 +67,6 @@ export const getMid = async (identityId) => {
     path: `/mids/${identityId}`,
     method: 'GET',
   });
-  console.log('getMid', result);
   return result;
 };
 

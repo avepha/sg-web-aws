@@ -34,7 +34,7 @@ const actions = {
     // }, 4000);
   },
   REQUEST_SHADOW: async ({state}, data) => {
-    console.log('[INFO] REQUEST_SHADOW', state.thingName)
+    //console.log('[INFO] REQUEST_SHADOW', state.thingName)
     IoT.requestShadow(state.thingName)
   }
 }
@@ -58,7 +58,6 @@ const InitIoT = async (context) => {
 
   context.commit('SET_THINGNAME', resMid.mid)
   const attachs = await Api.attachConnectPolicy(identityId)
-  console.log('attach', attachs)
   const awsCredentials = JSON.parse(sessionStorage.getItem('awsCredentials'))
 
   IoT.initNewClient(awsCredentials)
@@ -107,7 +106,6 @@ const InitIoT = async (context) => {
   })
 
   IoT.attachThingStatusHandler((thingName, stat, clientToken, stateObject) => {
-    console.log(stat, stateObject)
     if (stat === 'accepted') {
       // check get message
       if (stateObject.state.reported) {

@@ -12,13 +12,12 @@ export const router = new VueRouter({
 
 router.beforeEach( async (to, from, next) => {
   let login = await Cognito.authUser();
-  console.log(to.path,login);
   if(login){
-    if(to.path == '/pages/login') next();
+    if(to.path === '/pages/login') next();
     else next()
   }
   else{
-    if(to.path == '/pages/login') next();
+    if(to.path === '/pages/login') next();
     else  next('/pages/login');
   }
 })

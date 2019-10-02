@@ -40,8 +40,7 @@ const actions = {
 // check is already logged in
 // route to dashboard
 const isAuth = async (dispatch) => {
-    let isLoggedIn = await Cognito.authUser();
-    console.log(isLoggedIn);
+    const isLoggedIn = await Cognito.authUser();
     if (isLoggedIn) {
         authenticationSuccess(dispatch);
     }

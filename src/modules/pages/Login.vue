@@ -1,65 +1,58 @@
 <template>
-  <div style="height: 100vh;">
-    <header id="header" style="height: 70px; background:#f4f4f4!important">
-      <div id="extr-page-header-space">
-        <span style="font-size: 25px; font-weight: bold;">
-          <img src="/src/assets/img/logo1.png" alt=""> </span>
+  <transition appear name="slide-fade">
+    <div class="centered" style="height: 100vh;">
+      <div class="card" style="margin: 50px;">
+        <img src="/src/assets/img/logo1.png" alt="">
       </div>
-      <span id="extr-page-header-space">
-        <span><a class="btn btn-default">Device</a></span>
-      </span>
-    </header>
 
-    <div class="container-fluid" style="margin-top: 100px;">
-      <div class="row" >
-            <div class="well no-padding col-md-4 col-lg-4" style="float: none; margin: 0 auto;">
-              <form  class="smart-form client-form" @submit.prevent="login">
-                <header>
-                  Sign In
-                </header>
-                <fieldset>
-                  <section>
-                    <label class="label">Username</label>
-                    <label class="input">
-                      <i class="icon-append fa fa-user"></i>
-                      <input type="text" name="email" v-model="username">
-                      <b class="tooltip tooltip-top-right">
-                        <i class="fa fa-user txt-color-teal"></i> Please enter username</b>
-                    </label>
-                  </section>
+      <div class="card column login">
+        <form class="smart-form" @submit.prevent="login">
+          <header>
+            <h2>Sign In</h2>
+          </header>
+          <fieldset>
+            <section>
+              <label class="label">Username</label>
+              <label class="input">
+                <i class="icon-append fa fa-user"></i>
+                <input type="text" required v-model="username">
+                <b class="tooltip tooltip-top-right">
+                  <i class="fa fa-user txt-color-teal"></i>
+                  Please enter username
+                </b>
+              </label>
+            </section>
 
-                  <section>
-                    <label class="label">Password</label>
-                    <label class="input">
-                      <i class="icon-append fa fa-lock"></i>
-                      <input type="password" name="password"  v-model="password">
-                      <b class="tooltip tooltip-top-right">
-                        <i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
-                    </label>
+            <section>
+              <label class="label">Password</label>
+              <label class="input">
+                <i class="icon-append fa fa-lock"></i>
+                <input type="password" required v-model="password">
+                <b class="tooltip tooltip-top-right">
+                  <i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+              </label>
 
-                  </section>
+            </section>
 
-                  <section>
-                    <label class="checkbox">
-                      <input type="checkbox" name="remember" checked="" v-model="stayIn">
-                      <i></i>Stay signed in</label>
-                  </section>
-                </fieldset>
-                <footer>
-                  <button type="submit" class="btn btn-success" :disabled="loginProcessing">
-                  <img src="/src/assets/img/Spinner.svg" height="35" v-show="loginProcessing">
-                    Sign in
-                  </button>
-                </footer>
-              </form>
-            </div>
-            <div style="position: fixed; bottom: 0; right: 0; color: grey;">
-              v.{{getVersion}}
-            </div>
+            <section>
+              <label class="checkbox">
+                <input type="checkbox" name="remember" checked="" v-model="stayIn">
+                <i></i>Stay signed in
+              </label>
+            </section>
+
+          </fieldset>
+          <footer>
+            <button type="submit" class="btn btn-success" :disabled="loginProcessing">
+              <img src="/src/assets/img/Spinner.svg" height="35" v-show="loginProcessing">
+              Sign in
+            </button>
+          </footer>
+        </form>
       </div>
+
     </div>
-
-  </div>
+  </transition>
 </template>
 
 
@@ -93,3 +86,41 @@ export default {
 };
 </script>
 
+
+<style scoped>
+  .centered {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 1px 1px 7px 1px grey;
+    padding: 10px;
+  }
+
+  @media screen and (max-width: 720px) {
+    .login {
+      width: 90vw;
+      margin-top: 50px;
+    }
+  }
+
+  @media screen and (min-width: 721px) and (max-width: 1280px){
+    .login {
+      width: 50vw;
+      margin-top: 50px;
+    }
+  }
+
+  @media screen and (min-width: 1281px){
+    .login {
+      width: 30vw;
+      margin-top: 50px;
+    }
+  }
+</style>
