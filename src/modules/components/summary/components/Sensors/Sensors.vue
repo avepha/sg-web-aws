@@ -39,15 +39,10 @@
                   </div>
 
                   <div class="show-stat-microcharts">
-                    
-                    <sensor-micro-chart id="soil">
-                      <span slot="sensor-name"  v-lang.FullSoil></span>
-                    </sensor-micro-chart>
-                    
                     <sensor-micro-chart id="temperature">
                       <span slot="sensor-name" v-lang.Temperature></span>
                     </sensor-micro-chart>
-                    
+
                     <sensor-micro-chart id="humidity">
                       <span slot="sensor-name" v-lang.Humidity> Humidity </span>
                     </sensor-micro-chart>
@@ -56,16 +51,28 @@
                       <span slot="sensor-name" v-lang.VPD>  </span>
                     </sensor-micro-chart>
 
-                    <sensor-micro-chart id="co2">
-                      <span slot="sensor-name"> CO<sub>2</sub> </span>
+                    <sensor-micro-chart id="soil">
+                      <span slot="sensor-name"  v-lang.FullSoil></span>
+                    </sensor-micro-chart>
+
+                    <sensor-micro-chart id="soil_temperature">
+                      <span slot="sensor-name" >Soil Temperature</span>
+                    </sensor-micro-chart>
+
+                    <sensor-micro-chart id="soil_potential">
+                      <span slot="sensor-name" >Water potential</span>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="par">
                       <span slot="sensor-name" v-lang.Par>  </span>
                     </sensor-micro-chart>
+
+                    <sensor-micro-chart id="co2">
+                      <span slot="sensor-name"> CO<sub>2</sub> </span>
+                    </sensor-micro-chart>
                   </div>
 
-                  
+
                 </div>
 
               </div>
@@ -106,7 +113,7 @@
       ...mapGetters(["GET_SENSORS"])
     },
     mounted() {
-      
+
     },
     created(){
       // this.$store.dispatch('updateSensors');

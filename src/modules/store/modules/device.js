@@ -1,20 +1,18 @@
-var moment = require('moment')
-var sensorModel = {
-  "soil": 0,
-  "par": 0,
-  "temperature": 0,
-  "humidity": 0,
-  "vpd": 0,
-  "co2": 0,
-  "floating": 0,
-  "date": "2018-01-01",
-  "time": "00:00:00",
-  "timestamp": 0,
-  "mid": "-"
-}
+import moment from 'moment'
 
 const state = {
-  sensors: sensorModel,
+  sensors: {
+    temperature: 0,
+    humidity: 0,
+    vpd: 0,
+    soil_temperature: 0,
+    soil: 0,
+    soil_potential: 0,
+    co2: 0,
+    light: 0,
+    par:0,
+    paracc: 0,
+  },
   control: [],
   gpio: [],
   date: moment().format('YYYY-MM-DD'),
@@ -55,9 +53,7 @@ const mutations = {
   SET_DATETIME: (state, datetime) => {
     state.date = datetime.date;
     state.time = datetime.time;
-
   }
-
 }
 
 const actions = {
@@ -77,11 +73,11 @@ const actions = {
     });
   },
   UPDATE_CONTROL_CH: ({dispatch, state}, ch) => {
-    var control = {}
-    control['ch' + (ch + 1)] = state.control[ch];
-    console.log(control);
+    const control = {}
+    const channel = parseInt(ch)
+    control[`ch${(channel + 1)}`] = state.control[channel];
     dispatch('UPDATE_THING', {
-      control: control
+      control,
     });
   }
 }

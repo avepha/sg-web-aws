@@ -1,7 +1,7 @@
 import * as log from 'loglevel';
 import { router } from '../../router/router'
 import * as Cognito from '../../lib/aws-cognito'
-import * as Api from '../../lib/api-gateway'
+
 const state = {
     isAuth: false,
     cognitoUser: null
