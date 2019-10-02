@@ -42,7 +42,7 @@
                 <i class="fa fa-plus"></i> ADD TIME
               </button>
 
-              
+
               <div class="alert alert-danger fade in" style="margin-top: 10px;" v-if="showAlert">
                 <button class="close" data-dismiss="alert"> × </button>
                 <i class="fa-fw fa fa-times"></i>
@@ -68,7 +68,7 @@
           </div>
 
         </fieldset>
-          
+
           <footer>
             <button @click="submit" type="button" class="btn btn-primary">
               Submit
@@ -102,7 +102,7 @@
         this.showAlert = false;
         var start = $("#starttime").val();
         var stop = $("#stoptime").val();
-        
+
 
         let starr = start.split(":");
         let stmin = parseInt(starr[0]) * 60 + parseInt(starr[1]);
@@ -110,7 +110,7 @@
         let sparr = stop.split(":");
         let spmin = parseInt(sparr[0]) * 60 + parseInt(sparr[1]);
 
-        if (stmin > spmin || (start =='') || (stop == '') ) {
+        if (stmin > spmin || (start === '') || (stop === '') ) {
           this.showAlert = true
           return;
         }
@@ -134,13 +134,13 @@
       ch: function () {
         return this.$route.params.ch;
       }
-      
+
     },
     watch: {
       ch: function(){
         this.update();
       },
-      starttime: function (data) {  
+      starttime: function (data) {
         console.log(this.starttime, this.stoptime);
       },
       stoptime: function (data) {

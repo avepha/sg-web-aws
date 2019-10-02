@@ -3,14 +3,15 @@
     <div class="row">
       <article class="col-sm-12 col-lg-8 col-lg-offset-2">
         <!-- new widget -->
-        <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false"
-          data-widget-colorbutton="false" data-widget-deletebutton="false">
+        <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false"
+             data-widget-fullscreenbutton="false"
+             data-widget-colorbutton="false" data-widget-deletebutton="false">
 
           <header>
             <span class="widget-icon">
               <i class="glyphicon glyphicon-stats txt-color-darken"></i>
             </span>
-            <h2>Live Sensors</h2>
+            <h2 v-lang.live_sensors>Live Sensors</h2>
 
             <ul class="nav nav-tabs pull-right in" id="myTab">
               <li class="active">
@@ -40,35 +41,35 @@
 
                   <div class="show-stat-microcharts">
                     <sensor-micro-chart id="temperature">
-                      <span slot="sensor-name" v-lang.Temperature></span>
+                      <span slot="sensor-name" v-lang.temperature/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="humidity">
-                      <span slot="sensor-name" v-lang.Humidity> Humidity </span>
+                      <span slot="sensor-name" v-lang.humidity/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="vpd">
-                      <span slot="sensor-name" v-lang.VPD>  </span>
+                      <span slot="sensor-name" v-lang.vpd/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="soil">
-                      <span slot="sensor-name"  v-lang.FullSoil></span>
+                      <span slot="sensor-name" v-lang.full_soil/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="soil_temperature">
-                      <span slot="sensor-name" >Soil Temperature</span>
+                      <span slot="sensor-name" v-lang.soil_temperature/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="soil_potential">
-                      <span slot="sensor-name" >Water potential</span>
+                      <span slot="sensor-name" v-lang.soil_potential/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="par">
-                      <span slot="sensor-name" v-lang.Par>  </span>
+                      <span slot="sensor-name" v-lang.par/>
                     </sensor-micro-chart>
 
                     <sensor-micro-chart id="co2">
-                      <span slot="sensor-name"> CO<sub>2</sub> </span>
+                      <span slot="sensor-name" v-lang.co2/>
                     </sensor-micro-chart>
                   </div>
 
@@ -89,36 +90,33 @@
 
 
 <script>
-  import {
-    mapGetters
-  } from "vuex";
+  import {mapGetters} from 'vuex'
 
-  import PieData from "../../../../models/PieChart.js";
-  import PieChart from "../../../@shared/PieChart.vue";
-  import Sparkline from '../../../@shared/Sparkline.vue'
+  import PieData from '../../../../models/PieChart.js'
   import SensorMicroChart from './components/SensorMicroChart.vue'
   import RealTimeGraph from './components/RealTimeGraph.vue'
+
   export default {
     data() {
       return {
         soil: 30,
         chartData: PieData
-      };
+      }
     },
     components: {
       RealTimeGraph,
       SensorMicroChart
     },
     computed: {
-      ...mapGetters(["GET_SENSORS"])
+      ...mapGetters(['GET_SENSORS'])
     },
     mounted() {
 
     },
-    created(){
+    created() {
       // this.$store.dispatch('updateSensors');
     }
-  };
+  }
 
 </script>
 

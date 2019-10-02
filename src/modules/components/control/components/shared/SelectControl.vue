@@ -2,21 +2,11 @@
   <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-3" data-widget-colorbutton="false"
     data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" role="widget">
 
-    <header role="heading" class="ui-sortable-handle">
-      <div class="jarviswidget-ctrls" role="menu">
-        <a class="button-icon jarviswidget-fullscreen-btn">
-          <i class="fa fa-expand "></i>
-        </a>
-      </div>
-      <h2>
-        <strong>Control</strong>
-        <i>panel</i>
-      </h2>
+    <header role="heading">
+      <h2><strong v-lang.control-control_panel/></h2>
     </header>
     <div role="content">
-      <!-- <h1>{{control[ch-1].setpoint.setpoint}}</h1> -->
-      <div class="jarviswidget-editbox">
-      </div>
+
       <div class="widget-body">
         <form class="smart-form">
           <fieldset>
@@ -24,31 +14,28 @@
               <section class="col col-12">
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="0" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF" ></i>Manual</label>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"/><span v-lang.control-manual/>
+                </label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="1" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Timer</label>
-                <!--<label class="toggle">-->
-                  <!--<input type="radio" name="radio-toggle" value="2" v-model="select">-->
-                  <!--<i data-swchon-text="ON" data-swchoff-text="OFF"></i>Set point</label>-->
-                <!--<label class="toggle">-->
-                  <!--<input type="radio" name="radio-toggle" value="3" v-model="select">-->
-                  <!--<i data-swchon-text="ON" data-swchoff-text="OFF"></i>Set Bound</label>-->
-                <!--<label class="toggle">-->
-                  <!--<input type="radio" name="radio-toggle" value="4" v-model="select">-->
-                  <!--<i data-swchon-text="ON" data-swchoff-text="OFF"></i>Setbound & Timing</label>-->
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"/><span v-lang.control-timer/>
+                </label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="6" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Setpoint</label>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"/><span v-lang.control-setpoint/>
+                </label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="7" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Setbound</label>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"/><span v-lang.control-setbound/>
+                </label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="8" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Setbound & Timing</label>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"/><span v-lang.control-setbound_timing/>
+                </label>
                 <label class="toggle">
                   <input type="radio" name="radio-toggle" value="5" v-model="select">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Irrigation</label>
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"/><span v-lang.control-advance_irrigation/>
+                </label>
               </section>
             </div>
           </fieldset>

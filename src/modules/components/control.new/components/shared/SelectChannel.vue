@@ -8,8 +8,7 @@
         </a>
       </div>
       <h2>
-        <strong>Channel</strong>
-        <i>panel {{ch}}</i>
+        <strong> <span v-lang.control-channel/> {{ch}} </strong>
       </h2>
       <span class="jarviswidget-loader">
         <i class="fa fa-refresh fa-spin"></i>

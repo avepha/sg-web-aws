@@ -10,32 +10,26 @@
             </a>
           </div>
           <h2>
-            <strong>MCU Status</strong>
-            <i>panel</i>
+            <strong v-lang.mcu_status-mcu_status/>
           </h2>
 
         </header>
         <div role="content">
-          <div class="jarviswidget-editbox">
-
-          </div>
           <div class="widget-body">
             <form class="smart-form">
-              <header>
-                CHANNEL OUTPUT 
-              </header>
+              <header v-lang.mcu_status-channel_output/>
               <fieldset>
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th style="padding: 10px;">CHANNEL</th>
-                        <th style="padding: 10px;">OUTPUT</th>
+                        <th style="padding: 10px;" v-lang.mcu_status-channel/>
+                        <th style="padding: 10px;" v-lang.mcu_status-output/>
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="(value,ind) in GET_GPIO" :key="value + ' ' + ind">
-                        <td style="padding: 5px; font-size: 16px;"> Channel {{ind + 1}} </td>
+                        <td style="padding: 5px; font-size: 16px;"><span v-lang.mcu_status-channel/> : {{ind + 1}}</td>
                         <td style="padding: 5px;">
                           <button-status :value="value"></button-status>
                         </td>
@@ -44,78 +38,9 @@
                   </table>
                 </div>
               </fieldset>
-              <!-- <header>
-              Water Status
-            </header>
-           <fieldset>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th style="padding: 10px;">Status</th>
-                      <th style="padding: 10px;">Current Time</th>
-                      <th style="padding: 10px;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style="padding: 5px; font-size: 16px;">{{GetWater.type.toUpperCase()}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetWater.data.crt}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetWater.data.max}}</td>
-                    </tr>
-                    <tr>
-                      <td style="padding: 5px; font-size: 16px;">Floating Sensors</td>
-                      <td style="padding: 5px; font-size: 16px;">{{getSensors.floating}}</td>
-                      <td style="padding: 5px; font-size: 16px;"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </fieldset>
-
-
-             <header>
-              Nutrition
-            </header>
-            <fieldset>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th style="padding: 10px;">Sensor</th>
-                      <th style="padding: 10px;">current</th>
-                      <th style="padding: 10px;">Set point</th>
-                      <th style="padding: 10px;">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style="padding: 5px; font-size: 16px;">CO2</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetCO2.data.crt}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{setpointCo2}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetCO2.data.mode}}</td>
-                    </tr>
-                     <tr>
-                      <td style="padding: 5px; font-size: 16px;">Conductivity</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetEC.data.crt}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{setpointEC}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetEC.data.mode}}</td>
-                    </tr>
-                    <tr>
-                      <td style="padding: 5px; font-size: 16px;">Acidity</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetPH.data.crt}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{setpointPH}}</td>
-                      <td style="padding: 5px; font-size: 16px;">{{GetPH.data.mode}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </fieldset> -->
 
               <footer>
-                <button type="button" class="btn btn-default">
-                  Refresh
-                </button>
+                <button type="button" class="btn btn-default" v-lang.mcu_status-refresh/>
               </footer>
             </form>
           </div>
