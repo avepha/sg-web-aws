@@ -1,46 +1,32 @@
 <template>
-  <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-3"
-       data-widget-colorbutton="false"
-       data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" role="widget">
+  <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable">
 
     <header role="heading" class="ui-sortable-handle">
-      <div class="jarviswidget-ctrls" role="menu">
-        <a class="button-icon jarviswidget-fullscreen-btn">
-          <i class="fa fa-expand "></i>
-        </a>
-      </div>
-      <h2>
-        <strong> Data Logger</strong>
-        <i>panel</i>
-      </h2>
-
+      <h2><strong v-lang.logger-data_logger_panel/></h2>
     </header>
     <div role="content">
-      <div class="jarviswidget-editbox">
-
-      </div>
       <div class="widget-body">
         <form class="smart-form">
           <fieldset>
             <div class="row">
               <section>
-                <label>Choose start-date</label>
+                <label v-lang.logger-choose_start_date/>
                 <input type="date" name="" id="" class="form-control" v-model="dateStart">
               </section>
               <section>
-                <label>Choose end-date</label>
+                <label v-lang.logger-choose_end_date/>
                 <input type="date" name="" id="" class="form-control" v-model="dateEnd">
               </section>
               <section>
                 <label>Choose Interval</label>
                 <label class="select" style="margin-bottom: 20px;">
                   <select class="input-lg" v-model.number="interval">
-                    <option v-if="diffDate < 10" value="1">1 minute</option>
-                    <option v-if="diffDate < 20" value="3">3 minutes</option>
-                    <option v-if="diffDate < 30" value="5">5 minutes</option>
-                    <option v-if="diffDate < 30" value="10">10 minutes</option>
-                    <option v-if="diffDate < 30" value="15">15 minutes</option>
-                    <option value="30">30 minutes</option>
+                    <option v-if="diffDate < 10" value="1">1 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate < 20" value="3">3 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate < 30" value="5">5 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate < 30" value="10">10 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate < 30" value="15">15 <span v-lang.logger-minute/></option>
+                    <option value="30">30 <span v-lang.logger-minute/></option>
                   </select>
                   <i></i>
                 </label>
@@ -49,7 +35,7 @@
           </fieldset>
           <footer>
             <button type="button" class="btn btn-primary" @click="fetchData">
-              Fetch Data
+              <span v-lang.logger-fetch_data/>
             </button>
           </footer>
         </form>
@@ -73,14 +59,14 @@
       }
     },
     computed: {
-      diffDate(){
-        const start = moment(this.dateStart);
+      diffDate() {
+        const start = moment(this.dateStart)
         const end = moment(this.dateEnd)
         return Math.abs(end.diff(start, 'days'))
       }
     },
     watch: {
-      diffDate(diffStartToEnd){
+      diffDate(diffStartToEnd) {
         if (diffStartToEnd > 5) this.interval = 30
       }
     },
@@ -97,7 +83,7 @@
               after: this.dateStart,
             }
           })
-        },1000)
+        }, 1000)
       }
     }
   }

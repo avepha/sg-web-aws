@@ -134,19 +134,19 @@
       <ul class="header-dropdown-list">
         <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="/src/assets/img/blank.gif" class="flag flag-us" alt="United States">
-            <span> English (US) </span>
+            <img src="/src/assets/img/blank.gif" :class="lang[language].flag" alt="United States">
+            <span> {{lang[language].name}}  </span>
             <i class="fa fa-angle-down"></i>
           </a>
           <ul class="dropdown-menu pull-right">
-            <li class="active">
+            <li @click="changeLanguage('en')">
               <a href="javascript:void(0);">
                 <img src="/src/assets/img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>
             </li>
-            <!-- <li>
+            <li  @click="changeLanguage('jp')">
               <a href="javascript:void(0);">
-                <img src="/src/assets/img/blank.gif" class="flag flag-jp" alt="Japan"> 日本語</a>
-            </li> -->
+                <img src="/src/assets/img/blank.gif" class="flag flag-jp" alt="Japan"> 日本語 </a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -160,12 +160,30 @@
 
 <script>
   export default {
-    
+    data(){
+      return {
+        lang: {
+          en: {
+            flag: 'flag flag-us' ,
+            name: 'English (US)'
+          },
+          jp: {
+            flag: 'flag flag-jp' ,
+            name: '日本語 (JP)'
+          }
+        }
+      }
+    },
+
     methods: {
       logout() {
         this.$store.dispatch('LOGOUT_USER');
+      },
+      changeLanguage(lang){
+        this.language = lang;
       }
     }
   }
 
 </script>
+
