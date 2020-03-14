@@ -7,10 +7,9 @@
           <i class="fa fa-expand "></i>
         </a>
       </div>
-      <h2>
-        <strong>Advance Condition</strong>
-        <i>panel</i>
-      </h2>
+      <header role="heading">
+        <h2><strong v-lang.control-setpoint/></h2>
+      </header>
 
     </header>
     <div role="content">
@@ -19,13 +18,13 @@
       </div>
       <div class="widget-body">
         <form class="smart-form">
-          <header>Timer</header>
+          <header v-lang.control-timer/>
           <fieldset>
             <div class="row">
               <div class="col col-5">
                 <label class="toggle">
                   <input type="checkbox" name="checkbox-toggle" v-model="control[ch-1].setpoint.timer_flag">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Timer Condition
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> <span v-lang.control-timer_condition/>
                 </label>
                 <br>
               </div>
@@ -33,7 +32,7 @@
             <section v-show="control[ch-1].setpoint.timer_flag">
               <section class="col-xs-5">
                 <label class="input">
-                  <input type="text" placeholder="Start Time" id="starttime" readonly>
+                  <input type="text" :placeholder="this.translate('control-start_time')" id="starttime" readonly>
                 </label>
               </section>
               <section class="col-xs-1">
@@ -41,16 +40,14 @@
               </section>
               <section class="col-xs-5">
                 <label class="input">
-                  <input type="text" placeholder="Stop time" id="stoptime" readonly>
+                  <input type="text" :placeholder="this.translate('control-stop_time')" id="stoptime" readonly>
                 </label>
               </section>
               <button type="button" class="btn btn-primary btn-lg btn-block" @click="addTimer">
                 <i class="fa fa-plus"></i> ADD TIME
               </button>
 
-              <header>Timer List </header>
-
-
+              <header v-lang.control-timer_list/>
               <div class="dd" id="nestable2">
                 <ol class="dd-list">
                   <li class="dd-item" data-id="13" v-for="(time,index) in timerList" :key="time[0]+index">
@@ -59,7 +56,7 @@
                       -
                       <span style="color:rgb(68, 177, 68); font-size: 18px;">{{time[1] | minToTime}}</span>
                       <a @click="deleteTimer(index)" class="pull-right badge bg-color-red padding-5" rel="tooltip"
-                        title="" data-placement="left" data-original-title="Warning Icon Text">
+                         title="" data-placement="left" data-original-title="Warning Icon Text">
                         <i class="fa fa-trash-o fa-lg txt-color-white"></i>
                       </a>
                     </div>
@@ -69,86 +66,70 @@
             </section>
           </fieldset>
 
-          <header>Sensor</header>
+          <header v-lang.control-sensor/>
           <fieldset>
             <div class="row">
               <div class="col col-5">
                 <label class="toggle">
                   <input type="checkbox" name="checkbox-toggle" v-model="control[ch-1].setpoint.sensor_flag">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Sensor Condition
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> <span v-lang.control-sensor_condition/>
                 </label>
                 <br>
               </div>
             </div>
 
             <section v-show="control[ch - 1].setpoint.sensor_flag">
-                <app-range :sliderobj="conditionObj" id="conditionslider" v-model.number="control[ch-1].setpoint.sensor_setpoint"
-                style="margin-bottom: 20px;"></app-range>
+              <app-range :sliderobj="conditionObj" id="conditionslider"
+                         v-model.number="control[ch-1].setpoint.sensor_setpoint"
+                         style="margin-bottom: 20px;"></app-range>
               <label class="select" style="margin-bottom: 20px;">
-                Select Sensor:
-                <select class="input-lg" v-model='sensorCondition' style="background-color: #9de57e">
-                  <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                  <option value="-1">Select Sensor</option>
-                  <option value="0">VPD</option>
-                  <option value="1">Soil Moisture</option>
-                  <option value="3">Temperature</option>
-                  <option value="4">Humidity</option>
-                  <option value="5">Carbon dioxide</option>
-                </select>
+                <span v-lang.control-select_sensor/>
+                <app-select-sensor v-model="sensorCondition"></app-select-sensor>
               </label>
 
-                <label class="select" style="margin-bottom: 20px;">Select Condition:
-                    <select class="input-lg" v-model='control[ch-1].setpoint.sensor_direction' style="background-color: #9de57e" >
-                      <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                      <option value="1">Greater than ( &ge; )</option>
-                      <option value="0">Less than (&le;)</option>
-                    </select>
-                  </label>
+              <label class="select" style="margin-bottom: 20px;">Select Condition:
+                <select class="input-lg" v-model='control[ch-1].setpoint.sensor_direction'
+                        style="background-color: #9de57e">
+                  <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
+                  <option value="1" v-lang.control-greater_than/>
+                  <option value="0" v-lang.control-less_than/>
+                </select>
+              </label>
             </section>
           </fieldset>
 
-          <header>Setpoint</header>
+          <header v-lang.setpoint/>
           <fieldset>
-
             <section>
-              <label class="label">Working time</label>
+              <label class="label" v-lang.control-working_time/>
               <label class="input">
                 <input type="number" class="input-md" v-model.number="control[ch-1].setpoint.working">
               </label>
             </section>
             <section>
-              <label class="label">Detecting time</label>
+              <label class="label" v-lang.control-detecting_time/>
               <label class="input">
                 <input type="number" class="input-md" v-model.number="control[ch-1].setpoint.detecting">
               </label>
             </section>
 
             <app-range :sliderobj="setpointObj" id="setpointslider" v-model.number="control[ch-1].setpoint.setpoint"
-              style="margin-bottom: 20px;"></app-range>
-              <label class="select" style="margin-bottom: 20px;">Select Sensor:
-                  <select class="input-lg" v-model='sensor' style="background-color: #9de57e">
-                    <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                    <option value="-1">Select Sensor</option>
-                    <option value="0">VPD</option>
-                    <option value="1">Soil Moisture</option>
-                    <option value="3">Temperature</option>
-                    <option value="4">Humidity</option>
-                    <option value="5">Carbon dioxide</option>
-                  </select>
-                </label>
+                       style="margin-bottom: 20px;"></app-range>
+            <label class="select" style="margin-bottom: 20px;"> <span v-lang.control-select_sensor/>
+              <app-select-sensor v-model="sensor"></app-select-sensor>
+            </label>
 
-              <label class="select" style="margin-bottom: 20px;">Select Condition:
-                  <select class="input-lg" v-model='control[ch-1].setpoint.direction' style="background-color: #9de57e" >
-                    <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                    <option value="1">Greater than ( &ge; )</option>
-                    <option value="0">Less than (&le;)</option>
-                  </select>
-                </label>
+            <label class="select" style="margin-bottom: 20px;">Select Condition:
+              <select class="input-lg" v-model='control[ch-1].setpoint.direction' style="background-color: #9de57e">
+                <option value="1" v-lang.control-greater_than />
+                <option value="0" v-lang.control-less_than />
+              </select>
+            </label>
           </fieldset>
 
           <footer>
             <button @click="submit" type="button" class="btn btn-primary">
-              Submit
+              <span v-lang.control-submit/>
             </button>
           </footer>
         </form>
@@ -170,13 +151,13 @@
   //         "working": 15,
   //         "detecting": 30
   //     }
-  import {
-    mapGetters
-  } from 'vuex'
-  import Range from "./shared/Range.vue";
-  import RangeData from "./models/Range.js";
-  var $ = (window.jQuery = require("jquery"));
-  require("../../../../assets/js/plugin/clockpicker/clockpicker.min.js");
+  import {mapGetters} from 'vuex'
+  import Range from './shared/Range.vue'
+  import RangeData from './models/Range.js'
+  import SelectSensor from './shared/selectSensor'
+
+  var $ = (window.jQuery = require('jquery'))
+  require('../../../../assets/js/plugin/clockpicker/clockpicker.min.js')
   export default {
     data() {
       return {
@@ -192,96 +173,97 @@
     computed: {
       ...mapGetters(['control', 'getSensorName']),
       ch: function () {
-        return this.$route.params.ch;
+        return this.$route.params.ch
       }
     },
     watch: {
       sensor: function (data) {
-        this.control[this.ch - 1].setpoint.sensor = parseInt(this.sensor);
-        var sensor = this.getSensorName[data];
-        var objData = RangeData[sensor];
-        this.setpointObj = objData;
+        this.control[this.ch - 1].setpoint.sensor = parseInt(this.sensor)
+        var sensor = this.getSensorName[data]
+        var objData = RangeData[sensor]
+        this.setpointObj = objData
       },
       sensorCondition: function (data) {
-        this.control[this.ch - 1].setpoint.sensor_condition = parseInt(this.sensorCondition);
-        var sensor = this.getSensorName[this.sensorCondition];
-        var objData = RangeData[sensor];
-        this.conditionObj = objData;
+        this.control[this.ch - 1].setpoint.sensor_condition = parseInt(this.sensorCondition)
+        var sensor = this.getSensorName[this.sensorCondition]
+        var objData = RangeData[sensor]
+        this.conditionObj = objData
       },
       timerFlag: function (data) {
-        this.control[this.ch - 1].setpoint.timer_flag = (data) ? 1 : 0;
+        this.control[this.ch - 1].setpoint.timer_flag = (data) ? 1 : 0
       },
       sensorFlag: function (data) {
-        this.control[this.ch - 1].setpoint.sensor_flag = (data) ? 1 : 0;
+        this.control[this.ch - 1].setpoint.sensor_flag = (data) ? 1 : 0
       }
     },
     methods: {
       submit: function () {
-        this.$store.dispatch('popupUpdateModal');
-        this.control[this.ch - 1].mode = 6;
-        this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1);
+        this.$store.dispatch('popupUpdateModal')
+        this.control[this.ch - 1].mode = 6
+        this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1)
       },
       update: function () {
-        this.control[this.ch - 1].setpoint.sensor = this.sensor;
-        var sensor = this.getSensorName[this.sensor];
-        var objData = RangeData[sensor];
-        objData.from = this.control[this.ch - 1].setpoint.setpoint;
-        this.setpointObj = objData;
+        this.control[this.ch - 1].setpoint.sensor = this.sensor
+        var sensor = this.getSensorName[this.sensor]
+        var objData = RangeData[sensor]
+        objData.from = this.control[this.ch - 1].setpoint.setpoint
+        this.setpointObj = objData
 
 
-        this.control[this.ch - 1].setpoint.sensor_condition = this.sensorCondition;
-        var sensorCondition = this.getSensorName[this.sensorCondition];
-        var objDataCondition = RangeData[sensorCondition];
-        objDataCondition.from = this.control[this.ch - 1].setpoint.sensor_setpoint;
-        this.conditionObj = objDataCondition;
+        this.control[this.ch - 1].setpoint.sensor_condition = this.sensorCondition
+        var sensorCondition = this.getSensorName[this.sensorCondition]
+        var objDataCondition = RangeData[sensorCondition]
+        objDataCondition.from = this.control[this.ch - 1].setpoint.sensor_setpoint
+        this.conditionObj = objDataCondition
       },
 
       addTimer: function () {
-        this.showAlert = false;
-        var start = $("#starttime").val();
-        var stop = $("#stoptime").val();
+        this.showAlert = false
+        var start = $('#starttime').val()
+        var stop = $('#stoptime').val()
 
 
-        let starr = start.split(":");
-        let stmin = parseInt(starr[0]) * 60 + parseInt(starr[1]);
+        let starr = start.split(':')
+        let stmin = parseInt(starr[0]) * 60 + parseInt(starr[1])
 
-        console.log(stmin);
+        console.log(stmin)
 
-        let sparr = stop.split(":");
-        let spmin = parseInt(sparr[0]) * 60 + parseInt(sparr[1]);
+        let sparr = stop.split(':')
+        let spmin = parseInt(sparr[0]) * 60 + parseInt(sparr[1])
 
         if (stmin > spmin || (start == '') || (stop == '')) {
           this.showAlert = true
-          return;
+          return
         }
-        let t = [stmin, spmin];
+        let t = [stmin, spmin]
 
-        if(this.control[this.ch - 1].setpoint.timer_list.length < 3){
+        if (this.control[this.ch - 1].setpoint.timer_list.length < 3) {
           this.control[this.ch - 1].setpoint.timer_list.push(t)
         }
       },
       deleteTimer: function (index) {
-        this.control[this.ch - 1].setpoint.timer_list.splice(index, 1);
+        this.control[this.ch - 1].setpoint.timer_list.splice(index, 1)
       }
     },
     components: {
-      appRange: Range
+      appRange: Range,
+      appSelectSensor: SelectSensor,
     },
     mounted() {
-      $("#starttime").clockpicker({
-        placement: "top",
-        donetext: "Done"
-      });
+      $('#starttime').clockpicker({
+        placement: 'top',
+        donetext: 'Done'
+      })
 
-      $("#stoptime").clockpicker({
-        placement: "top",
-        donetext: "Done"
-      });
-      this.sensor = this.control[this.$route.params.ch - 1].setpoint.sensor;
-      this.sensorCondition = this.control[this.$route.params.ch - 1].setpoint.sensor_condition;
-        this.timerList = this.control[this.$route.params.ch - 1].setpoint.timer_list;
-        this.update();
+      $('#stoptime').clockpicker({
+        placement: 'top',
+        donetext: 'Done'
+      })
+      this.sensor = this.control[this.$route.params.ch - 1].setpoint.sensor
+      this.sensorCondition = this.control[this.$route.params.ch - 1].setpoint.sensor_condition
+      this.timerList = this.control[this.$route.params.ch - 1].setpoint.timer_list
+      this.update()
     }
-  };
+  }
 
 </script>

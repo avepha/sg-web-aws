@@ -2,32 +2,16 @@
   <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-3" data-widget-colorbutton="false"
     data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" role="widget">
 
-    <header role="heading" class="ui-sortable-handle">
-      <div class="jarviswidget-ctrls" role="menu">
-        <a class="button-icon jarviswidget-fullscreen-btn">
-          <i class="fa fa-expand "></i>
-        </a>
-      </div>
-      <h2>
-        <strong>Timer</strong>
-        <i>panel</i>
-      </h2>
-
-    </header>
+    <header><span v-lang.control-timer/></header>
     <div role="content">
-      <div class="jarviswidget-editbox">
-
-      </div>
       <div class="widget-body">
         <form class="smart-form">
-          <header>
-            Timer
-          </header>
+          <header><span v-lang.control-timer/></header>
           <fieldset>
             <div class="row">
               <section class="col-xs-5">
                 <label class="input">
-                  <input type="text" placeholder="Start Time" id="starttime" readonly>
+                  <input type="text" :placeholder="this.translate('control-start_time')" id="starttime" readonly>
                 </label>
               </section>
               <section class="col-xs-1">
@@ -35,11 +19,11 @@
               </section>
               <section class="col-xs-5">
                 <label class="input">
-                  <input type="text" placeholder="Stop time" id="stoptime" readonly>
+                  <input type="text" :placeholder="this.translate('control-stop_time')" id="stoptime" readonly>
                 </label>
               </section>
               <button type="button" class="btn btn-primary btn-lg btn-block" @click="addTimer">
-                <i class="fa fa-plus"></i> ADD TIME
+                <i class="fa fa-plus"></i> <span v-lang.control-add_time/>
               </button>
 
 
@@ -51,7 +35,7 @@
             </div>
           </fieldset>
         <fieldset>
-          <header>Timer List </header>
+          <header><span v-lang.control-timer_list/></header>
           <div class="dd" id="nestable2">
             <ol class="dd-list">
               <li class="dd-item" data-id="13" v-for="(time,index) in timerList" :key="time[0]+index">
@@ -71,10 +55,10 @@
 
           <footer>
             <button @click="submit" type="button" class="btn btn-primary">
-              Submit
+              <span v-lang.control-submit/>
             </button>
             <button type="button" class="btn btn-default" onclick="window.history.back();">
-              Set default
+              <span v-lang.control-set_default/>
             </button>
           </footer>
         </form>

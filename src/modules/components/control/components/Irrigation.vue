@@ -3,28 +3,18 @@
     data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" role="widget">
 
     <header role="heading" class="ui-sortable-handle">
-      <div class="jarviswidget-ctrls" role="menu">
-        <a class="button-icon jarviswidget-fullscreen-btn">
-          <i class="fa fa-expand "></i>
-        </a>
-      </div>
-      <h2>
-        <strong>Irrigation</strong>
-        <i>panel</i>
-      </h2>
+      <h2><strong v-lang.control-advance_irrigation/></h2>
     </header>
-    <div role="content">
-      <div class="jarviswidget-editbox">
 
-      </div>
+    <div role="content">
+
       <div class="widget-body">
         <form class="smart-form">
-
           <fieldset>
-            <label class="select label" style="margin-bottom: 20px;"> Sensors
+            <label class="select label" style="margin-bottom: 20px;"> <span v-lang.control-select_sensor/>
               <select class="input-lg" style="background-color: rgb(157, 229, 126);" v-model.number="control[ch-1].irrigation.mode">
-                <option value="0">PAR</option>
-                <option value="1">PAR & Soil</option>
+                <option value="0" v-lang.control-par/>
+                <option value="1"><span v-lang.par/> & <span v-lang.soil/></option>
                 <option value="2">PAR AI</option>
               </select>
             </label>
@@ -86,7 +76,7 @@
                 <label class="label">PAR setpoint</label>
               <app-range :sliderobj="parobj" id="irrigation" v-model="par" style="margin-bottom: 20px;"></app-range>
               </section>
-              
+
             </fieldset>
           </div>
           <footer>
