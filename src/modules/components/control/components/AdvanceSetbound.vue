@@ -2,30 +2,20 @@
   <div class="jarviswidget jarviswidget-color-greenDark jarviswidget-sortable" id="wid-id-3">
 
     <header role="heading" class="ui-sortable-handle">
-      <div class="jarviswidget-ctrls" role="menu">
-        <a class="button-icon jarviswidget-fullscreen-btn">
-          <i class="fa fa-expand "></i>
-        </a>
-      </div>
       <h2>
-        <strong>Advance Condition</strong>
-        <i>panel</i>
+        <strong v-lang.control-setbound/>
       </h2>
-
     </header>
     <div role="content">
-      <div class="jarviswidget-editbox">
-
-      </div>
       <div class="widget-body">
         <form class="smart-form">
-          <header>Timer</header>
+          <header v-lang.control-timer/>
           <fieldset>
             <div class="row">
               <div class="col col-5">
                 <label class="toggle">
                   <input type="checkbox" name="checkbox-toggle" v-model="control[ch-1].advsb.timer_flag">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Timer Condition
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> <span v-lang.control-timer_condition/>
                 </label>
                 <br>
               </div>
@@ -33,7 +23,7 @@
             <section v-show="control[ch-1].advsb.timer_flag">
               <section class="col-xs-5">
                 <label class="input">
-                  <input type="text" placeholder="Start Time" id="starttime" readonly>
+                  <input type="text" :placeholder="this.translate('control-start_time')" id="starttime" readonly>
                 </label>
               </section>
               <section class="col-xs-1">
@@ -41,16 +31,14 @@
               </section>
               <section class="col-xs-5">
                 <label class="input">
-                  <input type="text" placeholder="Stop time" id="stoptime" readonly>
+                  <input type="text" :placeholder="this.translate('control-stop_time')" id="stoptime" readonly>
                 </label>
               </section>
               <button type="button" class="btn btn-primary btn-lg btn-block" @click="addTimer">
-                <i class="fa fa-plus"></i> ADD TIME
+                <i class="fa fa-plus"></i> <span v-lang.control-add_time/>
               </button>
 
-              <header>Timer List </header>
-
-             
+              <header v-lang.control-timer_list/>
               <div class="dd" id="nestable2">
                 <ol class="dd-list">
                   <li class="dd-item" data-id="13" v-for="(time,index) in timerList" :key="time[0]+index">
@@ -59,7 +47,7 @@
                       -
                       <span style="color:rgb(68, 177, 68); font-size: 18px;">{{time[1] | minToTime}}</span>
                       <a @click="deleteTimer(index)" class="pull-right badge bg-color-red padding-5" rel="tooltip"
-                        title="" data-placement="left" data-original-title="Warning Icon Text">
+                         title="" data-placement="left" data-original-title="Warning Icon Text">
                         <i class="fa fa-trash-o fa-lg txt-color-white"></i>
                       </a>
                     </div>
@@ -69,72 +57,56 @@
             </section>
           </fieldset>
 
-          <header>Sensor</header>
+          <header v-lang.control-sensor/>
           <fieldset>
             <div class="row">
               <div class="col col-5">
                 <label class="toggle">
                   <input type="checkbox" name="checkbox-toggle" v-model="control[ch-1].advsb.sensor_flag">
-                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i>Sensor Condition
+                  <i data-swchon-text="ON" data-swchoff-text="OFF"></i> <span v-lang.control-sensor_condition/>
                 </label>
                 <br>
               </div>
             </div>
 
             <section v-show="control[ch - 1].advsb.sensor_flag">
-                <app-range :sliderobj="conditionObj" id="conditionslider" v-model.number="control[ch-1].advsb.sensor_setpoint"
-                style="margin-bottom: 20px;"></app-range>
+              <app-range :sliderobj="conditionObj" id="conditionslider"
+                         v-model.number="control[ch-1].advsb.sensor_setpoint"
+                         style="margin-bottom: 20px;"></app-range>
               <label class="select" style="margin-bottom: 20px;">
-                Select Sensor:
-                <select class="input-lg" v-model='sensorCondition' style="background-color: #9de57e">
-                  <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                  <option value="-1">Select Sensor</option>
-                  <option value="0">VPD</option>
-                  <option value="1">Soil Moisture</option>
-                  <option value="3">Temperature</option>
-                  <option value="4">Humidity</option>
-                  <option value="5">Carbon dioxide</option>
+                <span v-lang.control-select_sensor/>
+                <app-select-sensor v-model="sensorCondition"/>
+              </label>
+
+              <label class="select" style="margin-bottom: 20px;"> <span v-lang.control-select_condition/>
+                <select class="input-lg" v-model='control[ch-1].advsb.sensor_direction'
+                        style="background-color: #9de57e">
+                  <option value="1" v-lang.control-greater_than/>
+                  <option value="0" v-lang.control-less_than/>
                 </select>
               </label>
-              
-                <label class="select" style="margin-bottom: 20px;">Select Condition:
-                    <select class="input-lg" v-model='control[ch-1].advsb.sensor_direction' style="background-color: #9de57e" >
-                      <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                      <option value="1">Greater than ( &ge; )</option>
-                      <option value="0">Less than (&le;)</option>
-                    </select>
-                  </label>
             </section>
           </fieldset>
 
-          <header>SetBound</header>
+          <header v-lang.control-setbound/>
           <fieldset>
             <app-range :sliderobj="setboundObj" id="setpointslider" v-model="setboundValue"
-              style="margin-bottom: 20px;"></app-range>
-              <label class="select" style="margin-bottom: 20px;">Select Sensor:
-                  <select class="input-lg" v-model='sensor' style="background-color: #9de57e">
-                    <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                    <option value="-1">Select Sensor</option>
-                    <option value="0">VPD</option>
-                    <option value="1">Soil Moisture</option>
-                    <option value="3">Temperature</option>
-                    <option value="4">Humidity</option>
-                    <option value="5">Carbon dioxide</option>
-                  </select>
-                </label>
+                       style="margin-bottom: 20px;"></app-range>
+            <label class="select" style="margin-bottom: 20px;"> <span v-lang.control-select_sensor/>
+              <app-select-sensor v-model='sensor'/>
+            </label>
 
-              <label class="select" style="margin-bottom: 20px;">Select Condition:
-                  <select class="input-lg" v-model='control[ch-1].advsb.direction' style="background-color: #9de57e" >
-                    <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
-                    <option value="1">Greater than ( &ge; )</option>
-                    <option value="0">Less than (&le;)</option>
-                  </select>
-                </label>
+            <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition/>
+              <select class="input-lg" v-model='control[ch-1].advsb.direction' style="background-color: #9de57e">
+                <option value="1" v-lang.control-greater_than/>
+                <option value="0" v-lang.control-less_than/>
+              </select>
+            </label>
           </fieldset>
 
           <footer>
             <button @click="submit" type="button" class="btn btn-primary">
-              Submit
+              <span v-lang.control-submit/>
             </button>
           </footer>
         </form>
@@ -144,137 +116,128 @@
 </template>
 
 <script>
-// "advsb": {
-//         "timer_list": [],
-//         "timer_size": 0,
-//         "timer_flag": false,
-//         "sensor_condition": 3,
-//         "sensor_setpoint": 30,
-//         "sensor_flag": false,
-//         "sensor": 5,
-//         "setpoint": 600,
-//         "working": 15,
-//         "detecting": 30
-//     }
-import { mapGetters } from "vuex";
-import Range from "./shared/Range.vue";
-import RangeData from "./models/Range.js";
-import DoubleRangeData from "./models/DoubleRange.js";
-var $ = (window.jQuery = require("jquery"));
-require("../../../../assets/js/plugin/clockpicker/clockpicker.min.js");
-export default {
-  data() {
-    return {
-      timerFlag: false,
-      sensorFlag: false,
-      sensor: 5,
-      sensorCondition: 3,
-      setboundObj: {},
-      conditionObj: {},
-      timerList: [],
-      setboundValue: 0
-    };
-  },
-  computed: {
-    ...mapGetters(["control", "getSensorName"]),
-    ch: function() {
-      return this.$route.params.ch;
-    }
-  },
-  watch: {
-    setboundValue: function(data) {
-      var arr = data.split(";");
-      this.control[this.ch - 1].advsb.lower = parseInt(arr[0]);
-      this.control[this.ch - 1].advsb.upper = parseInt(arr[1]);
-    },
-    sensor: function(data) {
-      this.control[this.ch - 1].advsb.sensor = parseInt(this.sensor);
-      var sensor = this.getSensorName[data];
-      var objData = DoubleRangeData[sensor];
-      this.setboundObj = objData;
-    },
-    sensorCondition: function(data) {
-      this.control[this.ch - 1].advsb.sensor_condition = parseInt(
-        this.sensorCondition
-      );
-      var sensor = this.getSensorName[this.sensorCondition];
-      var objData = RangeData[sensor];
-      this.conditionObj = objData;
-    },
-    timerFlag: function(data) {
-      this.control[this.ch - 1].advsb.timer_flag = data ? 1 : 0;
-    },
-    sensorFlag: function(data) {
-      this.control[this.ch - 1].advsb.sensor_flag = data ? 1 : 0;
-    }
-  },
-  methods: {
-    submit: function() {
-      this.$store.dispatch("popupUpdateModal");
-      this.control[this.ch - 1].mode = 7;
-      this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1);
-    },
-    update: function() {
-      this.control[this.ch - 1].advsb.sensor = this.sensor;
-      var sensor = this.getSensorName[this.sensor];
-      var objData = DoubleRangeData[sensor];
-      objData.from = this.control[this.ch - 1].advsb.lower;
-      objData.to = this.control[this.ch - 1].advsb.upper;
-      this.setboundObj = objData;
+  import {mapGetters} from 'vuex'
+  import Range from './shared/Range.vue'
+  import RangeData from './models/Range.js'
+  import DoubleRangeData from './models/DoubleRange.js'
+  import SelectSensor from './shared/selectSensor'
 
-      this.control[this.ch - 1].advsb.sensor_condition = this.sensorCondition;
-      var sensorCondition = this.getSensorName[this.sensorCondition];
-      var objDataCondition = RangeData[sensorCondition];
-      objDataCondition.from = this.control[this.ch - 1].advsb.sensor_setpoint;
-      this.conditionObj = objDataCondition;
-    },
-
-    addTimer: function() {
-      this.showAlert = false;
-      var start = $("#starttime").val();
-      var stop = $("#stoptime").val();
-
-      let starr = start.split(":");
-      let stmin = parseInt(starr[0]) * 60 + parseInt(starr[1]);
-
-      console.log(stmin);
-
-      let sparr = stop.split(":");
-      let spmin = parseInt(sparr[0]) * 60 + parseInt(sparr[1]);
-
-      if (stmin > spmin || start == "" || stop == "") {
-        this.showAlert = true;
-        return;
-      }
-      let t = [stmin, spmin];
-
-      if (this.control[this.ch - 1].advsb.timer_list.length < 3) {
-        this.control[this.ch - 1].advsb.timer_list.push(t);
+  var $ = (window.jQuery = require('jquery'))
+  require('../../../../assets/js/plugin/clockpicker/clockpicker.min.js')
+  export default {
+    data() {
+      return {
+        timerFlag: false,
+        sensorFlag: false,
+        sensor: 5,
+        sensorCondition: 3,
+        setboundObj: {},
+        conditionObj: {},
+        timerList: [],
+        setboundValue: 0
       }
     },
-    deleteTimer: function(index) {
-      this.control[this.ch - 1].advsb.timer_list.splice(index, 1);
-    }
-  },
-  components: {
-    appRange: Range
-  },
-  mounted() {
-    $("#starttime").clockpicker({
-      placement: "top",
-      donetext: "Done"
-    });
+    computed: {
+      ...mapGetters(['control', 'getSensorName']),
+      ch: function () {
+        return this.$route.params.ch
+      }
+    },
+    watch: {
+      setboundValue: function (data) {
+        var arr = data.split(';')
+        this.control[this.ch - 1].advsb.lower = parseInt(arr[0])
+        this.control[this.ch - 1].advsb.upper = parseInt(arr[1])
+      },
+      sensor: function (data) {
+        this.control[this.ch - 1].advsb.sensor = parseInt(this.sensor)
+        var sensor = this.getSensorName[data]
+        var objData = DoubleRangeData[sensor]
+        this.setboundObj = objData
+      },
+      sensorCondition: function (data) {
+        this.control[this.ch - 1].advsb.sensor_condition = parseInt(
+          this.sensorCondition
+        )
+        var sensor = this.getSensorName[this.sensorCondition]
+        var objData = RangeData[sensor]
+        this.conditionObj = objData
+      },
+      timerFlag: function (data) {
+        this.control[this.ch - 1].advsb.timer_flag = data ? 1 : 0
+      },
+      sensorFlag: function (data) {
+        this.control[this.ch - 1].advsb.sensor_flag = data ? 1 : 0
+      }
+    },
+    methods: {
+      submit: function () {
+        this.$store.dispatch('popupUpdateModal')
+        this.control[this.ch - 1].mode = 7
+        this.$store.dispatch('UPDATE_CONTROL_CH', this.ch - 1)
+      },
+      update: function () {
+        this.control[this.ch - 1].advsb.sensor = this.sensor
+        var sensor = this.getSensorName[this.sensor]
+        var objData = DoubleRangeData[sensor]
+        objData.from = this.control[this.ch - 1].advsb.lower
+        objData.to = this.control[this.ch - 1].advsb.upper
+        this.setboundObj = objData
 
-    $("#stoptime").clockpicker({
-      placement: "top",
-      donetext: "Done"
-    });
-    this.sensor = this.control[this.$route.params.ch - 1].advsb.sensor;
-    this.sensorCondition = this.control[
+        this.control[this.ch - 1].advsb.sensor_condition = this.sensorCondition
+        var sensorCondition = this.getSensorName[this.sensorCondition]
+        var objDataCondition = RangeData[sensorCondition]
+        objDataCondition.from = this.control[this.ch - 1].advsb.sensor_setpoint
+        this.conditionObj = objDataCondition
+      },
+
+      addTimer: function () {
+        this.showAlert = false
+        var start = $('#starttime').val()
+        var stop = $('#stoptime').val()
+
+        let starr = start.split(':')
+        let stmin = parseInt(starr[0]) * 60 + parseInt(starr[1])
+
+        console.log(stmin)
+
+        let sparr = stop.split(':')
+        let spmin = parseInt(sparr[0]) * 60 + parseInt(sparr[1])
+
+        if (stmin > spmin || start == '' || stop == '') {
+          this.showAlert = true
+          return
+        }
+        let t = [stmin, spmin]
+
+        if (this.control[this.ch - 1].advsb.timer_list.length < 3) {
+          this.control[this.ch - 1].advsb.timer_list.push(t)
+        }
+      },
+      deleteTimer: function (index) {
+        this.control[this.ch - 1].advsb.timer_list.splice(index, 1)
+      }
+    },
+    components: {
+      appRange: Range,
+      appSelectSensor: SelectSensor
+    },
+    mounted() {
+      $('#starttime').clockpicker({
+        placement: 'top',
+        donetext: 'Done'
+      })
+
+      $('#stoptime').clockpicker({
+        placement: 'top',
+        donetext: 'Done'
+      })
+      this.sensor = this.control[this.$route.params.ch - 1].advsb.sensor
+      this.sensorCondition = this.control[
       this.$route.params.ch - 1
-    ].advsb.sensor_condition;
-    this.timerList = this.control[this.$route.params.ch - 1].advsb.timer_list;
-    this.update();
+        ].advsb.sensor_condition
+      this.timerList = this.control[this.$route.params.ch - 1].advsb.timer_list
+      this.update()
+    }
   }
-};
 </script>
