@@ -18,7 +18,7 @@
                 <input type="date" name="" id="" class="form-control" v-model="dateEnd">
               </section>
               <section>
-                <label>Choose Interval</label>
+                <label v-lang.logger-choose_interval />
                 <label class="select" style="margin-bottom: 20px;">
                   <select class="input-lg" v-model.number="interval">
                     <option v-if="diffDate < 10" value="1">1 <span v-lang.logger-minute/></option>

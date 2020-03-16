@@ -87,7 +87,7 @@
                 <app-select-sensor v-model="sensorCondition"></app-select-sensor>
               </label>
 
-              <label class="select" style="margin-bottom: 20px;">Select Condition:
+              <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition />
                 <select class="input-lg" v-model='control[ch-1].setpoint.sensor_direction'
                         style="background-color: #9de57e">
                   <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
@@ -119,7 +119,7 @@
               <app-select-sensor v-model="sensor"></app-select-sensor>
             </label>
 
-            <label class="select" style="margin-bottom: 20px;">Select Condition:
+            <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition />
               <select class="input-lg" v-model='control[ch-1].setpoint.direction' style="background-color: #9de57e">
                 <option value="1" v-lang.control-greater_than />
                 <option value="0" v-lang.control-less_than />

@@ -110,7 +110,7 @@
               <app-select-sensor v-model="sensor"></app-select-sensor>
             </label>
 
-            <label class="select" style="margin-bottom: 20px;">Select Condition:
+            <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition />
               <select class="input-lg" v-model='control[ch-1].advsbt.direction' style="background-color: #9de57e">
                 <option value="1" v-lang.control-greater_than/>
                 <option value="0" v-lang.control-less_than/>

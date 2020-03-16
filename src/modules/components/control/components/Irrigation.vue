@@ -40,7 +40,7 @@
             </fieldset>
           </div>
           <div>
-            <header>PAR</header>
+            <header v-lang.par/>
             <fieldset>
               <section  v-show="control[ch-1].irrigation.mode == 1">
                 <label class="label">Soil Setpoint</label>
@@ -67,13 +67,13 @@
                 </label>
               </section>
               <section>
-                <label class="label">PAR working</label>
+                <label class="label" control-par_working/>
                 <label class="input">
                   <input type="number" class="input-md" v-model.number="control[ch-1].irrigation.par_working">
                 </label>
               </section>
               <section>
-                <label class="label">PAR setpoint</label>
+                <label class="label" v-lang.control-par_setpoint />
               <app-range :sliderobj="parobj" id="irrigation" v-model="par" style="margin-bottom: 20px;"></app-range>
               </section>
 
@@ -81,10 +81,10 @@
           </div>
           <footer>
             <button type="button" @click="submit" class="btn btn-primary">
-              Submit
+              <span v-lang.control-submit />
             </button>
             <button type="button" class="btn btn-default" onclick="window.history.back();">
-              Set default
+              <span v-lang.control-set_default />
             </button>
           </footer>
         </form>
