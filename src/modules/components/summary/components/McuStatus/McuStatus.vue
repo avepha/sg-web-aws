@@ -16,33 +16,30 @@
         </header>
         <div role="content">
           <div class="widget-body">
-            <form class="smart-form">
+            <form class="smart-form" v-if="GET_GPIO.length > 0">
               <header v-lang.mcu_status-channel_output/>
-              <fieldset>
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th style="padding: 10px;" v-lang.mcu_status-channel/>
-                        <th style="padding: 10px;" v-lang.mcu_status-output/>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(value,ind) in GET_GPIO" :key="value + ' ' + ind">
-                        <td style="padding: 5px; font-size: 16px;"><span v-lang.mcu_status-channel/> : {{ind + 1}}</td>
-                        <td style="padding: 5px;">
-                          <button-status :value="value"></button-status>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </fieldset>
 
-              <footer>
-                <button type="button" class="btn btn-default" v-lang.mcu_status-refresh/>
-              </footer>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th style="padding: 10px;" v-lang.mcu_status-channel/>
+                    <th style="padding: 10px;" v-lang.mcu_status-output/>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for="(value,ind) in GET_GPIO" :key="value + ' ' + ind">
+                    <td style="padding: 5px; font-size: 16px;"><span v-lang.mcu_status-channel/> : {{ind + 1}}</td>
+                    <td style="padding: 5px;">
+                      <button-status :value="value"></button-status>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
             </form>
+            <McuLogger />
           </div>
         </div>
       </div>
@@ -56,10 +53,13 @@
   import { mapGetters } from "vuex";
   import ButtonStatus from "./components/ButtonStatus";
   import ParProgress from "./components/ParProgress.vue";
+  import McuLogger from './McuLogger'
+
   export default {
     components: {
       ButtonStatus,
-      ParProgress
+      ParProgress,
+      McuLogger
     },
     data() {
       return {
