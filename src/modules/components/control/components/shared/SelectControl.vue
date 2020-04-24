@@ -63,7 +63,6 @@ export default {
   },
   watch:{
     select:function(data){
-      console.log(data);
      this.$router.replace({
        name: controlName[data]
      })

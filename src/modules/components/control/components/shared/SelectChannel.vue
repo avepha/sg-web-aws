@@ -51,19 +51,20 @@
           this.select = -1
         }
       },
-      select: function (data) {
-        if (data !== -1) {
-          this.$router.replace({
-            name: this.getControlName[data - 1],
-            params: {
-              ch: data
-            }
-          })
+      select: function (ch) {
+        if (ch !== -1) {
+          this.$router.replace({name: 'control', params: {ch}})
+          setTimeout(() => {
+            this.$router.replace({
+              name: this.getControlName[ch - 1],
+              params: {
+                ch
+              }
+            })
+          }, 500)
         }
         else {
-          this.$router.replace({
-            name: 'grobot-control'
-          })
+          this.$router.replace({name: 'control'})
         }
       }
     },
