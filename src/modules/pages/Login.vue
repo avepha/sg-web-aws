@@ -51,6 +51,9 @@
         </form>
       </div>
 
+      <div class="bt-right">
+        build version:{{version}}
+      </div>
     </div>
   </transition>
 </template>
@@ -58,13 +61,15 @@
 
 <script>
 import { mapGetters } from "vuex";
+import pkg from '../../../package.json'
 export default {
   data() {
     return {
       username: "grobot",
       password: "raspberry",
       stayIn: false,
-      loginProcessing: false
+      loginProcessing: false,
+      version: pkg.version
     };
   },
   methods: {
@@ -88,6 +93,12 @@ export default {
 
 
 <style scoped>
+  .bt-right {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+  }
+
   .centered {
     display: flex;
     justify-content: start;
