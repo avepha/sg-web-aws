@@ -5,7 +5,7 @@
         <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
           <img src="/src/assets/img/avatars/man.png" alt="me"/>
           <span>
-            SmartGrobot
+            Username: <strong>{{username}} </strong>
           </span>
           <i class="fa fa-angle-down"></i>
         </a>
@@ -68,6 +68,7 @@
   export default {
     data() {
       return {
+        username: localStorage.getItem('username'),
         collapse: {
           configuration: false
         }

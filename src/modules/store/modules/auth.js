@@ -17,7 +17,10 @@ const actions = {
     LOGIN_USER: ({ dispatch, commit, state }, authData) => {
         clearCognitoLocalStorage();
         Cognito.loginUser(authData.username, authData.password)
-            .then(userData => loginUserSuccess(dispatch, userData.userObj, userData.awsCredentials, 'user_pool', ''))
+            .then(userData => {
+              localStorage.setItem('username', authData.username)
+              return loginUserSuccess(dispatch, userData.userObj, userData.awsCredentials, 'user_pool', '')
+            })
             .catch((error) => {
                 log.error(error);
                 alert(error.message);
