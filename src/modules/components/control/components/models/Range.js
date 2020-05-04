@@ -36,7 +36,7 @@ export default {
     name: 'par',
     hide_min_max: true,
     min: 0,
-    max: 3,
+    max: 10,
     from: 1.0,
     type: 'single',
     step: 0.1,
@@ -72,7 +72,7 @@ export default {
     max: 0,
     from: -1E6,
     type: 'single',
-    step: 1,
+    step: 100000,
     postfix: " Pa",
     grid: true
   },

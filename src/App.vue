@@ -12,7 +12,7 @@
     created(){
       console.log(this.$store.getters.getVersion)
       this.$store.dispatch('IS_AUTH');
-    }
+    },
   };
 
 </script>

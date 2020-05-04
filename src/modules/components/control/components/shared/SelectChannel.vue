@@ -16,7 +16,7 @@
             <label class="select">
               <select class="input-lg" v-model="select">
                 <option value="-1" key="c0" v-lang.control-choose_channel/>
-                <option v-for="({mode},ind) in control" :key="controlName[mode] + ind" :value="ind+1">
+                <option v-for="({mode},ind) in control" :key="ind" :value="ind+1">
                   <span v-lang.control-channel/>  {{ind+1}}: {{getControlNameAndTranslateByIndex(mode)}}
                 </option>
               </select>
@@ -31,10 +31,11 @@
 
 <script>
   import {mapGetters} from 'vuex'
+  import ctrlMap from 'src/constants/controlMap'
 
   export default {
     computed: {
-      ...mapGetters(['getControlName', 'control']),
+      ...mapGetters(['control']),
       ch: function () {
         return this.$route.params.ch
       }
@@ -51,20 +52,26 @@
           this.select = -1
         }
       },
-      select: function (ch) {
-        if (ch !== -1) {
-          this.$router.replace({name: 'control', params: {ch}})
+      select: function (selectedChannel) {
+        if (selectedChannel !== -1) {
+          const controlCode = this.control[selectedChannel - 1].mode
+          if (!ctrlMap[`${controlCode}`]) {
+            return alert(`No control code: ${controlCode}`)
+          }
+
+          this.$router.replace({name: 'control', params: {ch: selectedChannel}})
           setTimeout(() => {
             this.$router.replace({
-              name: this.getControlName[ch - 1],
+              name: ctrlMap[`${controlCode}`],
               params: {
-                ch
+                ch: selectedChannel
               }
             })
           }, 500)
-        }
-        else {
-          this.$router.replace({name: 'control'})
+        } else {
+          this.$router.replace({
+            name: 'control'
+          })
         }
       }
     },

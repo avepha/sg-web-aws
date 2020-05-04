@@ -1,14 +1,3 @@
-// import GrobotSummary from '../components/summary/GrobotSummary.vue'
-// import Summary from '../components/summary/components/Summary.vue'
-// import Sensors from '../components/summary/components/Sensors/Sensors.vue'
-// import RealTimeGraph from '../components/summary/components/RealTimeGraph.vue'
-// import Activity from '../components/summary/components/Activity.vue'
-// import McuStatus from '../components/summary/components/McuStatus/McuStatus.vue'
-const GrobotSummary = resolve => {
-  require.ensure(['../components/summary/GrobotSummary.vue'], () => {
-    resolve(require('../components/summary/GrobotSummary.vue'))
-  }, 'grobot-summary')
-}
 const Summary = resolve => {
   require.ensure(['../components/summary/components/Summary.vue'], () => {
     resolve(require('../components/summary/components/Summary.vue'))
@@ -36,33 +25,24 @@ const Timer = resolve => {
   }, 'grobot-control')
 }
 
-const Setbound = resolve => {
-  require.ensure(['../components/control/components/Setbound.vue'], () => {
-    resolve(require('../components/control/components/Setbound.vue'))
-  }, 'grobot-control')
-}
-
-const Hybrid = resolve => {
-  require.ensure(['../components/control/components/Hybrid.vue'], () => {
-    resolve(require('../components/control/components/Hybrid.vue'))
-  }, 'grobot-Hybrid')
-}
 const Irrigation = resolve => {
   require.ensure(['../components/control/components/Irrigation.vue'], () => {
     resolve(require('../components/control/components/Irrigation.vue'))
   }, 'grobot-control')
 }
 
-const AdvanceCondition = resolve => {
-  require.ensure(['../components/control/components/AdvanceCondition.vue'], () => {
-    resolve(require('../components/control/components/AdvanceCondition.vue'))
+const Setpoint = resolve => {
+  require.ensure(['../components/control/components/Setpoint.vue'], () => {
+    resolve(require('../components/control/components/Setpoint.vue'))
   }, 'grobot-control')
 }
+
 const AdvanceSetbound = resolve => {
   require.ensure(['../components/control/components/AdvanceSetbound.vue'], () => {
     resolve(require('../components/control/components/AdvanceSetbound.vue'))
   }, 'grobot-control')
 }
+
 const AdvanceTimingSetbound = resolve => {
   require.ensure(['../components/control/components/AdvanceTimingSetbound.vue'], () => {
     resolve(require('../components/control/components/AdvanceTimingSetbound.vue'))
@@ -207,16 +187,10 @@ export const routes = [
           {path: ':ch/', name: 'control-ch', component: Control},
           {path: ':ch/manual', name: 'manual', component: Manual},
           {path: ':ch/timer', name: 'timer', component: Timer},
-          {path: ':ch/hybrid', name: 'hybrid', component: Hybrid},
-          {path: ':ch/setbound', name: 'setbound', component: Setbound},
+          {path: ':ch/setpoint', name: 'setpoint', component: Setpoint},
+          {path: ':ch/advsb', name: 'setbound', component: AdvanceSetbound},
+          {path: ':ch/advsbt', name: 'setboundTiming', component: AdvanceTimingSetbound},
           {path: ':ch/irrigation', name: 'irrigation', component: Irrigation},
-          {path: ':ch/setpoint', name: 'advancecondition', component: AdvanceCondition},
-          {path: ':ch/advsb', name: 'advancesetbound', component: AdvanceSetbound},
-          {path: ':ch/advsbt', name: 'advancetimingsetbound', component: AdvanceTimingSetbound},
-          {path: 'conductivity', name: 'conductivity', component: Conductivity},
-          {path: 'co2', name: 'co2', component: Co2},
-          {path: 'led', name: 'led', component: Led},
-          {path: 'water', name: 'water', component: WaterProcess},
         ]
       },
       {
@@ -247,29 +221,4 @@ export const routes = [
       {path: 'show', name: 'show', component: ShowData}
     ]
   }
-
-  // {path: '/grobot-summary',name: 'grobot-summary', component: GrobotSummary, children:[
-  //     {path: 'summary', name:"summary", component: Summary },
-  //     {path: 'status', name:"mcu-status", component: McuStatus }
-  // ]},
-  // {path: '/grobot-control', name:'grobot-control', component: Control, children:[
-  //     {path: ':ch/', name: "control-ch", component: Control},
-  //     {path: ':ch/manual',name:"manual", component: Manual},
-  //     {path: ':ch/timer',name:"timer", component: Timer},
-  //     {path: ':ch/setpoint',name:"setpoint", component: Setpoint},
-  //     {path: ':ch/setbound',name:"setbound", component: Setbound},
-  //     {path: ':ch/irrigation',name:"irrigation", component: Irrigation},
-  // ]},
-  // {path: '/grobot-setting', name: 'grobot-setting', component: Setting , children: [
-  //     {path: 'datetime', name:'setting-datetime', component: DateTime},
-  //     {path: 'sensors', name:'setting-sensors', component: SensorSetting},
-  //     {path: 'activity', name: 'setting-activity', component: ActivitySetting},
-  //     {path: 'network', name: 'setting-network', component: Network, children:[
-  //         {path: 'station', name: 'setting-network-station', component: Station},
-  //         {path: 'ap', name: 'setting-network-ap', component: Ap}
-  //     ]},
-  // ]},
-  // {path: '/grobot-datalogger', name: 'datalogger', component: DataLogger},
-  // {path: '/connection-status', name: 'connection-status', component: ConnectionStatus},
-  // {path: '/*', redirect: "/grobot-summary/summary"}
 ]

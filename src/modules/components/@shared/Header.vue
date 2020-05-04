@@ -1,57 +1,12 @@
 <template>
   <header id="header">
-    <div id="logo-group">
-
-      <!-- PLACE YOUR LOGO HERE -->
-      <span id="logo"></span>
-      <!-- END LOGO PLACEHOLDER -->
-
-      <!-- Note: The activity badge color changes when clicked and resets the number to 0
-				Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-      <span id="activity" class="activity-dropdown">
+    <div id="logo-group" class="container">
+      <span id="logo-user" class="center">
         <i class="fa fa-user"></i>
-        <!-- <b class="badge"> 21 </b> -->
+        <strong>{{(username && username.toUpperCase()) || 'GROBOT'}} </strong>
       </span>
 
-      <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
-      <div class="ajax-dropdown">
-
-        <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
-        <div class="btn-group btn-group-justified" data-toggle="buttons">
-          <label class="btn btn-default">
-            <input type="radio" name="activity" id="ajax/notify/mail.html"> Msgs (14) </label>
-          <label class="btn btn-default">
-            <input type="radio" name="activity" id="ajax/notify/notifications.html"> notify (3) </label>
-          <label class="btn btn-default">
-            <input type="radio" name="activity" id="ajax/notify/tasks.html"> Tasks (4) </label>
-        </div>
-
-        <!-- notification content -->
-        <div class="ajax-notifications custom-scroll">
-
-          <div class="alert alert-transparent">
-            <h4>Click a button to show messages here</h4>
-            This blank page message helps protect your privacy, or you can show the first message here automatically.
-          </div>
-
-          <i class="fa fa-lock fa-4x fa-border"></i>
-
-        </div>
-        <!-- end notification content -->
-
-        <!-- footer: refresh area -->
-        <span> Last updated on: 12/12/2013 9:43AM
-          <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
-            <i class="fa fa-refresh"></i>
-          </button>
-        </span>
-        <!-- end footer -->
-
-      </div>
-      <!-- END AJAX-DROPDOWN -->
     </div>
-
-
 
     <!-- pulled right: nav area -->
     <div class="pull-right">
@@ -71,7 +26,7 @@
       <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
         <li class="">
           <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-            <img src="/src/assets/img/avatars/sunny.png" alt="John Doe" class="online" />
+            <img src="/src/assets/img/avatars/sunny.png" alt="John Doe" class="online"/>
           </a>
           <ul class="dropdown-menu pull-right">
             <li>
@@ -86,13 +41,15 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="toggleShortcut">
+              <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                 data-action="toggleShortcut">
                 <i class="fa fa-arrow-down"></i>
                 <u>S</u>hortcut</a>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="launchFullscreen">
+              <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                 data-action="launchFullscreen">
                 <i class="fa fa-arrows-alt"></i> Full
                 <u>S</u>creen</a>
             </li>
@@ -143,7 +100,7 @@
               <a href="javascript:void(0);">
                 <img src="/src/assets/img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>
             </li>
-            <li  @click="changeLanguage('jp')">
+            <li @click="changeLanguage('jp')">
               <a href="javascript:void(0);">
                 <img src="/src/assets/img/blank.gif" class="flag flag-jp" alt="Japan"> 日本語 </a>
             </li>
@@ -160,15 +117,16 @@
 
 <script>
   export default {
-    data(){
+    data() {
       return {
+        username: localStorage.getItem('username'),
         lang: {
           en: {
-            flag: 'flag flag-us' ,
+            flag: 'flag flag-us',
             name: 'English (US)'
           },
           jp: {
-            flag: 'flag flag-jp' ,
+            flag: 'flag flag-jp',
             name: '日本語 (JP)'
           }
         }
@@ -177,13 +135,33 @@
 
     methods: {
       logout() {
-        this.$store.dispatch('LOGOUT_USER');
+        this.$store.dispatch('LOGOUT_USER')
       },
-      changeLanguage(lang){
-        this.language = lang;
+      changeLanguage(lang) {
+        this.language = lang
       }
     }
   }
 
 </script>
 
+<style scoped>
+  #logo-user {
+    font-size: 20px;
+    color: white;
+  }
+
+  .container {
+    height: 100%;
+    position: relative;
+  }
+
+  .center {
+    margin-top: 7px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+</style>

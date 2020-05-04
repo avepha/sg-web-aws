@@ -26,7 +26,14 @@ export default {
         return this.value / this.PieData[this.id].max * 100
       },
       sensorValue(){
-          return this.value + ' ' + this.PieData[this.id].post
+        switch (this.id) {
+          case 'soil_potential':
+            return (this.value / 1e6).toFixed(2) + this.PieData[this.id].post
+          case 'vpd':
+            return this.value.toFixed(0) + this.PieData[this.id].post
+          default:
+            return this.value + ' ' + this.PieData[this.id].post
+        }
       }
   }
 };

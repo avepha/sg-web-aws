@@ -79,7 +79,7 @@ export default {
     from: -10E5,
     to: -10E6,
     type: 'double',
-    step: 1,
+    step: 100000,
     postfix: " Pa",
     grid: true
   },

@@ -48,10 +48,11 @@
 <script>
 
 import {mapGetters} from 'vuex';
-var controlName = ['manual', 'timer', 'setpoint', 'setbound', 'hybrid', 'irrigation', 'advancecondition', 'advancesetbound', 'advancetimingsetbound']
+import ctrlMap from 'src/constants/controlMap'
+
 export default {
   computed:{
-    ...mapGetters(['control','getControlName']),
+    ...mapGetters(['control']),
     ch: function(){
       return this.$route.params.ch;
     }
@@ -62,13 +63,13 @@ export default {
     }
   },
   watch:{
-    select:function(data){
-     this.$router.replace({
-       name: controlName[data]
-     })
+    select: function(controlCode) {
+      this.$router.replace({
+        name: ctrlMap[controlCode]
+      })
     },
-    ch: function(data){
-      this.select = this.control[this.$route.params.ch-1].mode;
+    ch: function () {
+      this.select = this.control[this.$route.params.ch - 1].mode
     }
   },
   mounted(){

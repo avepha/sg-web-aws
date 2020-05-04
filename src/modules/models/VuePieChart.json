@@ -13,11 +13,11 @@
   },
   "soil_temperature" : {
     "max": 100,
-    "post": "%"
+    "post": "C"
   },
   "soil_potential": {
     "max": -1E7,
-    "post": "kPa"
+    "post": "MPa"
   },
   "soil": {
     "max": 100,
