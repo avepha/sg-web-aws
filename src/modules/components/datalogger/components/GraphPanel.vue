@@ -8,7 +8,7 @@
         </a>
       </div>
       <h2>
-        <strong>Graph {{sensor}}</strong>
+        <strong>{{translate(sensor)}}</strong>
       </h2>
     </header>
     <div role="content">
@@ -23,16 +23,18 @@
             </div>
 
             <section>
-              <label>Choose Sensor</label>
+              <label v-lang.logger-choose_sensor/>
               <label class="select" style="margin-bottom: 20px;">
                 <select class="input-lg" v-model="sensor">
-                  <option value="soil">Soil Moisture</option>
-                  <option value="vpd">VPD</option>
-                  <option value="temperature">Temperature</option>
-                  <option value="humidity">Relative Humidity</option>
-                  <option value="co2">CO<sub>2</sub></option>
-                  <option value="par">PAR</option>
-                  <option value="paracc">PAR Accumulation</option>
+                  <option value="temperature" v-lang.temperature/>
+                  <option value="humidity" v-lang.humidity/>
+                  <option value="vpd" v-lang.full_vpd/>
+                  <option value="soil_temperature" v-lang.soil_temperature/>
+                  <option value="soil" v-lang.full_soil/>
+                  <option value="soil_potential" v-lang.soil_potential/>
+                  <option value="co2" v-lang.co2/>
+                  <option value="par" v-lang.par/>
+                  <option value="paracc" v-lang.paracc/>
                 </select>
                 <i></i>
               </label>
@@ -46,12 +48,12 @@
               <input type="hidden" name="before" :value="before"/>
               <input type="hidden" name="limit" :value="limit"/>
               <button type="submit" class="btn btn-primary">
-                <i class="fa fa-save "></i> Export to .xls
+                <i class="fa fa-save "></i> <span v-lang.logger-export_to_xls/>
               </button>
 
             </form>
             <button @click.prevent="refresh" type="submit" class="btn btn-default">
-              <i class="fa fa-refresh "></i> Refresh
+              <i class="fa fa-refresh "></i> <span v-lang.logger-refresh/>
             </button>
           </footer>
         </form>
@@ -91,10 +93,10 @@
         }, 2000)
       },
       filterDataByInterval(data, interval) {
-        if(data.length === 0) return []
+        if (data.length === 0) return []
 
         let skipCount = 1
-        return data.filter( () => {
+        return data.filter(() => {
           skipCount = (skipCount < interval) ? skipCount + 1 : 1
           return (skipCount >= interval)
         })

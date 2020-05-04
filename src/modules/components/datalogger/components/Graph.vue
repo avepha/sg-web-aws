@@ -5,7 +5,6 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
   import moment from 'moment';
   export default {
     props: ['data', 'sensor'],
@@ -13,18 +12,17 @@
       return {
         strData: '',
         date: '',
-        sensorFullName: {
-          soil: 'Soil Moisture (%)',
-          temperature: 'Temperature (C)',
-          water: 'Water (C)',
-          ec: 'Conducitivy (mc/ms)',
-          ph: 'Acidity',
-          vpd: 'Vapor Pressure (Pa)',
-          par: 'PAR (Watt/sqm)',
-          humidity: 'Humidity (%)',
-          paracc: 'PAR Accumulation (J/sqm)',
-          co2: 'Carbon dioxide (ppm)',
-          light: 'LED (Lux)'
+        sensorUnit: {
+          temperature: '(C)',
+          humidity: '(%)',
+          vpd: 'Vapor (Pa)',
+          soil_temperature: '(C)',
+          soil: '(%)',
+          soil_potential: '(P)',
+          par: '(Watt/sqm)',
+          paracc: '(J/sqm)',
+          co2: '(ppm)',
+          light: '(Lux)'
         }
       }
     },
@@ -35,8 +33,8 @@
             document.getElementById("graphdiv"),
             this.strData, {
               customBars: true,
-              title: "Daily " + this.sensorFullName[this.sensor] + " : in " + this.date,
-              ylabel: this.sensorFullName[this.sensor],
+              title: `${this.translate('logger-daily')} ${this.translate(this.sensor)} : in ${this.date}`,
+              ylabel: `${this.translate(this.sensor)} ${this.sensorUnit[this.sensor]}`,
               legend: "always",
               labelsDivStyles: {
                 textAlign: "right"
