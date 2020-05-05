@@ -65,10 +65,10 @@
         const mid = this.$store.getters.GET_THINGNAME
         let url
         if (this.channel === 0) {
-          url = `dev/channel-logger?mid=${mid}&after=${after.toISOString()}&before=${before.toISOString()}`
+          url = `dev/channel-logger?mid=${mid}&after=${after.toISOString()}&before=${before.toISOString()}&limit=200`
         }
         else {
-          url = `dev/channel-logger?mid=${mid}&channel=${this.channel}&after=${after.toISOString()}&before=${before.toISOString()}`
+          url = `dev/channel-logger?mid=${mid}&channel=${this.channel}&after=${after.toISOString()}&before=${before.toISOString()}&limit=200`
         }
 
         this.loggers = await axios.get(url)
