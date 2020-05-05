@@ -24,6 +24,9 @@
       model: function(value) {
         this.$emit('input', value)
       }
+    },
+    mounted() {
+      console.log(this.value)
     }
   }
 

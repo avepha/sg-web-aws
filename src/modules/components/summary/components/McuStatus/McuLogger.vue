@@ -1,21 +1,21 @@
 <template>
   <form class="smart-form margin-top-10">
-    <strong>Channel Log</strong>
+    <strong><span v-lang.mcu_status-channel_log/></strong>
     <form id="div-log" style="margin: 10px">
       <div>
         <input class="form-control" type="date" v-model="datetime" />
       </div>
       <div>
         <select class="form-control" v-model.number="channel">
-          <option value="0">channel: all</option>
-          <option value="1">channel: 1</option>
-          <option value="2">channel: 2</option>
-          <option value="3">channel: 3</option>
-          <option value="4">channel: 4</option>
+          <option value="0"><span v-lang.control-channel-all/></option>
+          <option value="1"><span v-lang.control-channel/>: 1</option>
+          <option value="2"><span v-lang.control-channel/>: 2</option>
+          <option value="3"><span v-lang.control-channel/>: 3</option>
+          <option value="4"><span v-lang.control-channel/>: 4</option>
         </select>
       </div>
       <div>
-        <button class="btn btn-sm btn-default" @click.prevent="search">Search</button>
+        <button class="btn btn-sm btn-default" @click.prevent="search"><span v-lang.mcu_status-search/></button>
       </div>
     </form>
     <div class="table-responsive">

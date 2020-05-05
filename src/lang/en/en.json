@@ -32,9 +32,12 @@
   "mcu_status-channel": "Channel",
   "mcu_status-output": "Output",
   "mcu_status-refresh": "Refresh",
+  "mcu_status-search": "Search",
+  "mcu_status-channel_log": "Channel Log",
 
   "control-select_channel_first": "Select channel first.",
   "control-channel": "Channel",
+  "control-channel-all": "Channel: all",
   "control-choose_channel": "Choose panel",
   "control-control_panel": "Control Panel",
 

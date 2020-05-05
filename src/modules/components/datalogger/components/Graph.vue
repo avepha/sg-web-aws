@@ -33,7 +33,7 @@
             document.getElementById("graphdiv"),
             this.strData, {
               customBars: true,
-              title: `${this.translate('logger-daily')} ${this.translate(this.sensor)} : in ${this.date}`,
+              title: `${this.translate('logger-daily')} ${this.translate(this.sensor)} : ${this.date}`,
               ylabel: `${this.translate(this.sensor)} ${this.sensorUnit[this.sensor]}`,
               legend: "always",
               labelsDivStyles: {
@@ -47,7 +47,7 @@
       },
       craftStringData: function () {
         this.strData = "Date," + this.sensor.toUpperCase() + "\n";
-        this.date = moment(this.data[0].created_time).format('MMM Do YYYY');
+        this.date = moment(this.data[0].created_time).format('YYYY/MM/DD');
         this.data.forEach(log => {
           let datetime = moment(log.created_time).format('YYYY-MM-DD HH:mm:ss')
           let sensorData = (log['sensors'][this.sensor] - 5) + ";" + (log['sensors'][this.sensor]) + ";" + (log['sensors'][this.sensor] + 5);

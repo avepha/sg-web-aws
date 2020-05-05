@@ -32,10 +32,13 @@
   "mcu_status-channel": "チャンネル",
   "mcu_status-output": "出力",
   "mcu_status-refresh": "更新",
+  "mcu_status-search": "サーチ",
+  "mcu_status-channel_log": "チャンネル記録",
 
   "control-select_channel_first": "チャンネルを選択",
   "control-choose_channel": "チャンネルを選択",
   "control-channel": "チャンネル",
+  "control-channel-all": "全チャンネル",
   "control-control_panel": "チャンネル",
 
   "control-advance_irrigation": "かん水",

@@ -262,6 +262,7 @@
       this.sensor = this.control[this.$route.params.ch - 1].setpoint.sensor
       this.sensorCondition = this.control[this.$route.params.ch - 1].setpoint.sensor_condition
       this.timerList = this.control[this.$route.params.ch - 1].setpoint.timer_list
+      console.log(this.sensorCondition)
       this.update()
     }
   }
