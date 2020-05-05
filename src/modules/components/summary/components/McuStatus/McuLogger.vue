@@ -80,7 +80,7 @@
       const after = moment.utc(moment().format('YYYY-MM-DD'))
       const before = moment.utc(moment().add(1439,'minutes').format('YYYY-MM-DD'))
       const mid = this.$store.getters.GET_THINGNAME
-      this.loggers = await axios.get(`dev/channel-logger?mid=${mid}&after=${after.toISOString()}&before=${before.toISOString()}`)
+      this.loggers = await axios.get(`dev/channel-logger?mid=${mid}&after=${after.toISOString()}&before=${before.toISOString()}&limit=200`)
         .then(({data}) => data)
         .catch(() => [])
     }
