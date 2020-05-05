@@ -1,5 +1,5 @@
 <template>
-  <select class="input-lg" v-model='model' style="background-color: #9de57e">
+  <select class="input-lg" v-model='value' style="background-color: #9de57e">
     <option value="-1" v-lang.control-select_sensor/>
     <option value="0" v-lang.temperature/>
     <option value="1" v-lang.humidity/>
@@ -21,13 +21,9 @@
       }
     },
     watch: {
-      model: function(value) {
+      model: function (value) {
         this.$emit('input', value)
       }
     },
-    mounted() {
-      console.log(this.value)
-    }
   }
-
 </script>

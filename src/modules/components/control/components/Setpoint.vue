@@ -87,7 +87,7 @@
                 <app-select-sensor v-model="sensorCondition"></app-select-sensor>
               </label>
 
-              <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition />
+              <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition/>
                 <select class="input-lg" v-model='control[ch-1].setpoint.sensor_direction'
                         style="background-color: #9de57e">
                   <!-- // 0:vpd, 1:soil, 2:par, 3:temp, 4:humi, 5:co2 -->
@@ -119,10 +119,10 @@
               <app-select-sensor v-model="sensor"></app-select-sensor>
             </label>
 
-            <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition />
+            <label class="select" style="margin-bottom: 20px;"><span v-lang.control-select_condition/>
               <select class="input-lg" v-model='control[ch-1].setpoint.direction' style="background-color: #9de57e">
-                <option value="1" v-lang.control-greater_than />
-                <option value="0" v-lang.control-less_than />
+                <option value="1" v-lang.control-greater_than/>
+                <option value="0" v-lang.control-less_than/>
               </select>
             </label>
           </fieldset>
@@ -156,7 +156,7 @@
   import RangeData from './models/Range.js'
   import SelectSensor from './shared/selectSensor'
 
-  var $ = (window.jQuery = require('jquery'))
+  const $ = (window.jQuery = require('jquery'))
   require('../../../../assets/js/plugin/clockpicker/clockpicker.min.js')
   export default {
     data() {
@@ -179,14 +179,14 @@
     watch: {
       sensor: function (data) {
         this.control[this.ch - 1].setpoint.sensor = parseInt(this.sensor)
-        var sensor = this.getSensorName[data]
-        var objData = RangeData[sensor]
+        const sensor = this.getSensorName[data]
+        const objData = RangeData[sensor]
         this.setpointObj = objData
       },
       sensorCondition: function (data) {
         this.control[this.ch - 1].setpoint.sensor_condition = parseInt(this.sensorCondition)
-        var sensor = this.getSensorName[this.sensorCondition]
-        var objData = RangeData[sensor]
+        const sensor = this.getSensorName[this.sensorCondition]
+        const objData = RangeData[sensor]
         this.conditionObj = objData
       },
       timerFlag: function (data) {
@@ -204,29 +204,26 @@
       },
       update: function () {
         this.control[this.ch - 1].setpoint.sensor = this.sensor
-        var sensor = this.getSensorName[this.sensor]
-        var objData = RangeData[sensor]
+        const sensor = this.getSensorName[this.sensor]
+        const objData = RangeData[sensor]
         objData.from = this.control[this.ch - 1].setpoint.setpoint
         this.setpointObj = objData
 
-
         this.control[this.ch - 1].setpoint.sensor_condition = this.sensorCondition
-        var sensorCondition = this.getSensorName[this.sensorCondition]
-        var objDataCondition = RangeData[sensorCondition]
+        const sensorCondition = this.getSensorName[this.sensorCondition]
+        const objDataCondition = RangeData[sensorCondition]
         objDataCondition.from = this.control[this.ch - 1].setpoint.sensor_setpoint
         this.conditionObj = objDataCondition
       },
 
       addTimer: function () {
         this.showAlert = false
-        var start = $('#starttime').val()
-        var stop = $('#stoptime').val()
+        const start = $('#starttime').val()
+        const stop = $('#stoptime').val()
 
 
         let starr = start.split(':')
         let stmin = parseInt(starr[0]) * 60 + parseInt(starr[1])
-
-        console.log(stmin)
 
         let sparr = stop.split(':')
         let spmin = parseInt(sparr[0]) * 60 + parseInt(sparr[1])
@@ -250,19 +247,12 @@
       appSelectSensor: SelectSensor,
     },
     mounted() {
-      $('#starttime').clockpicker({
-        placement: 'top',
-        donetext: 'Done'
-      })
+      $('#starttime').clockpicker({placement: 'top', donetext: 'Done'})
+      $('#stoptime').clockpicker({placement: 'top', donetext: 'Done'})
 
-      $('#stoptime').clockpicker({
-        placement: 'top',
-        donetext: 'Done'
-      })
       this.sensor = this.control[this.$route.params.ch - 1].setpoint.sensor
       this.sensorCondition = this.control[this.$route.params.ch - 1].setpoint.sensor_condition
       this.timerList = this.control[this.$route.params.ch - 1].setpoint.timer_list
-      console.log(this.sensorCondition)
       this.update()
     }
   }
