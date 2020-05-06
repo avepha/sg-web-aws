@@ -29,3 +29,4 @@ echo "[Info] Move src to dist $DEPLOY_PATH"
 cp -r $BASEDIR/src/assets $DIST_PATH/src
 cp -r $BASEDIR/index.html $DIST_PATH
 aws s3 sync $BASEDIR/public s3://sg-web-hosting
+aws cloudfront create-invalidation --distribution-id E1TXLZKFM14RST --paths="/*"
