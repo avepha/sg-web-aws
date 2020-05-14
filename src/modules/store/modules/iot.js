@@ -52,7 +52,7 @@ const InitIoT = async (context) => {
 
   context.dispatch('popupWifi', 'pending')
   const identityId = Cognito.getIdentityId()
-  console.log('identityId', identityId)
+  //console.log('identityId', identityId)
   let resMid = await Api.getMid(identityId)
   resMid = resMid.items[0]
 
@@ -76,9 +76,14 @@ const InitIoT = async (context) => {
     if (topic.startsWith('STREAM_STATUS')) {
       context.commit('SET_SENSORS', payload.sensors)
 
-      const datetime = (payload.datetime !== undefined) ?
-        moment(payload.datetime)
-        : moment()
+      let datetime
+      if (payload.hwDatetime) {
+        datetime = (payload.datetime) ? moment.utc(payload.hwDatetime) : moment()
+      }
+      else {
+        datetime = (payload.datetime) ? moment(payload.datetime) : moment()
+      }
+
 
       context.commit('SET_DATETIME', {
         date: datetime.format('YYYY-MM-DD'),
@@ -101,8 +106,7 @@ const InitIoT = async (context) => {
   IoT.attachThingErrorHandler((err) => console.log('[Info] AWS-IoT Shadow: ERROR', err))
 
   IoT.attachThingDeltaHandler((thingName, stateObject) => {
-    console.log('received delta on ' + thingName + ': ' +
-      JSON.stringify(stateObject.state))
+    //console.log('received delta on ' + thingName + ': ' + JSON.stringify(stateObject.state))
   })
 
   IoT.attachThingStatusHandler((thingName, stat, clientToken, stateObject) => {
