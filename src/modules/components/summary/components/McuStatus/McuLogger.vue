@@ -29,7 +29,7 @@
         </thead>
         <tbody>
         <tr v-for="({datetime, channel, status}, index) in loggers" :key="index">
-          <td style="padding: 5px; font-size: 12px;">{{moment.utc(datetime).format('DD/MM HH:mm:ss')}}</td>
+          <td style="padding: 5px; font-size: 12px;">{{moment.utc(datetime).format('MM/DD HH:mm:ss')}}</td>
           <td style="padding: 5px; font-size: 12px;">{{channel}}</td>
           <td style="padding: 5px;">
             <span :style="{color: status ? 'green' : 'red', fontSize: '15px'}">{{status ? 'ON' : 'OFF'}}</span>
