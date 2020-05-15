@@ -228,7 +228,7 @@ export const loginUser = (username, password) => (
       const userData = Object.assign({ awsCredentials }, { userObj: user });
       resolve(userData);
     }).catch((err) => {
-      log.error(err);
+      //log.error(err);
       reject(err);
     });
   })

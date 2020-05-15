@@ -42,6 +42,12 @@
             </section>
 
           </fieldset>
+
+          <div class="alert alert-danger" role="alert" v-if="AUTH_ERRORS['login']">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{AUTH_ERRORS['login']}}
+          </div>
           <footer>
             <button type="submit" class="btn btn-success" :disabled="loginProcessing">
               <img src="/src/assets/img/Spinner.svg" height="35" v-show="loginProcessing">
@@ -75,6 +81,7 @@ export default {
   methods: {
     login() {
       this.loginProcessing = true;
+      this.$store.commit('SET_AUTH_ERRORS', {topic: 'login', message: null}) // clear log errors
       this.$store.dispatch("LOGIN_USER", {
         username: this.username,
         password: this.password
@@ -86,7 +93,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['GET_SENSORS_DATA', 'getVersion'])
+    ...mapGetters(['GET_SENSORS_DATA', 'getVersion', 'AUTH_ERRORS'])
   }
 };
 </script>
