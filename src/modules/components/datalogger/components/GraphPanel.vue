@@ -113,8 +113,8 @@
       }
 
       this.mid = this.$store.getters.GET_THINGNAME
-      this.after = moment(after).toISOString()
-      this.before = moment(before).add(1439, 'minute').toISOString()
+      this.after = moment.utc(after).toISOString()
+      this.before = moment.utc(before).add(1439, 'minute').toISOString()
       this.limit = Number.MAX_SAFE_INTEGER
       axios.get('/dev/sensor-logger', {
         params: {
