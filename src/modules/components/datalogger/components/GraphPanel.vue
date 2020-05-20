@@ -125,11 +125,12 @@
         }
       }).then(response => {
         const {data: body} = response
+        this.$store.commit('popupShow', 'Records: ' + body.length)
+
         this.data = this.filterDataByInterval(body, interval)
         this.datevalue = 'DATE'
         this.sensor = 'soil'
 
-        this.$store.commit('popupShow', 'Records: ' + this.data.length)
         setTimeout(() => this.$store.commit('popupHide'), 3000)
 
         if (this.data.length === 0)

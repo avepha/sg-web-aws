@@ -18,14 +18,14 @@
                 <input type="date" name="" id="" class="form-control" v-model="dateEnd">
               </section>
               <section>
-                <label v-lang.logger-choose_interval />
+                <label v-lang.logger-choose_interval/>
                 <label class="select" style="margin-bottom: 20px;">
                   <select class="input-lg" v-model.number="interval">
-                    <option v-if="diffDate < 10" value="1">1 <span v-lang.logger-minute/></option>
-                    <option v-if="diffDate < 20" value="3">3 <span v-lang.logger-minute/></option>
-                    <option v-if="diffDate < 30" value="5">5 <span v-lang.logger-minute/></option>
-                    <option v-if="diffDate < 30" value="10">10 <span v-lang.logger-minute/></option>
-                    <option v-if="diffDate < 30" value="15">15 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate >= 0 && diffDate <= 3" value="1">1 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate >= 0 && diffDate <= 7" value="3">3 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate >= 0 && diffDate <= 14" value="5">5 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate >= 0 && diffDate <= 14" value="10">10 <span v-lang.logger-minute/></option>
+                    <option v-if="diffDate >= 0 && diffDate <= 14" value="15">15 <span v-lang.logger-minute/></option>
                     <option value="30">30 <span v-lang.logger-minute/></option>
                   </select>
                   <i></i>
@@ -33,11 +33,15 @@
               </section>
             </div>
           </fieldset>
-          <footer>
-            <button type="button" class="btn btn-primary" @click="fetchData">
+          <div style="display: flex; justify-content: flex-end;">
+            <span v-if="diffDate > 14" style="color: red; font-weight: bolder;">Can only fetch data between 14 days.</span>
+            <span v-if="diffDate < 0" style="color: red; font-weight: bolder;">Invalid input. start date must before end date. </span>
+            <button type="button"
+                    class="btn btn-sm btn-primary"
+                    @click="fetchData" v-if="diffDate >= 0 && diffDate <= 14">
               <span v-lang.logger-fetch_data/>
             </button>
-          </footer>
+          </div>
         </form>
       </div>
     </div>
@@ -62,7 +66,7 @@
       diffDate() {
         const start = moment(this.dateStart)
         const end = moment(this.dateEnd)
-        return Math.abs(end.diff(start, 'days'))
+        return end.diff(start, 'days')
       }
     },
     watch: {
