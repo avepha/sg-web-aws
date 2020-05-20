@@ -1,7 +1,7 @@
 {
   "name": "sg-v0",
   "description": "Smartgrobot Project",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "author": "Farhan Abuhazan <farhan.abuhazan@gmail.com>",
   "license": "MIT",
   "private": true,
