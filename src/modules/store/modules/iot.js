@@ -52,7 +52,7 @@ const InitIoT = async (context) => {
 
   context.dispatch('popupWifi', 'pending')
   const identityId = Cognito.getIdentityId()
-  //console.log('identityId', identityId)
+  console.log('identityId', identityId)
   let resMid = await Api.getMid(identityId)
   resMid = resMid.items[0]
 
