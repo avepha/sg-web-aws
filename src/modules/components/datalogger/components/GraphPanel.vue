@@ -64,14 +64,14 @@
 </template>
 
 <script>
-  import axios, {baseURL} from '../../../axios/axios'
+  import axios from '../../../axios/axios'
   import Graph from './Graph.vue'
   import moment from 'moment'
 
   export default {
     data() {
       return {
-        link: `${baseURL}/dev/sensor-logger-csv`,
+        link: `https://jhn7qbdyc4.execute-api.ap-southeast-1.amazonaws.com/dev/log/save`,
         sensor: 'soil',
         data: [],
         record: 0,
